@@ -6,8 +6,8 @@ let ratings = [];
 
 
 async function loadData() {
-const itemsText = await fetch('u.item').then(res => res.text());
-const dataText = await fetch('u.data').then(res => res.text());
+const itemsText = await fetch('u.item.txt').then(res => res.text());
+const dataText = await fetch('u.data.txt').then(res => res.text());
 
 
 // Parse u.item (movie list)
