@@ -1,15 +1,24 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Matrix Factorization Movie Recommender (TensorFlow.js)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movie Recommender with Matrix Factorization</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Decorative lotus petals around the page -->
+  <div class="lotus top-left"></div>
+  <div class="lotus top-right"></div>
+  <div class="lotus bottom-left"></div>
+  <div class="lotus bottom-right"></div>
+
   <main class="card">
-    <h1>Matrix Factorization Movie Recommender</h1>
-    <p class="lead">Train a lightweight matrix-factorization model entirely in your browser using TensorFlow.js and local MovieLens 100K files.</p>
+    <h1>Movie Recommender</h1>
+    <p class="lead">
+      Train a lightweight matrix-factorization model in your browser using TensorFlow.js
+      and the local MovieLens 100K dataset.
+    </p>
 
     <div class="controls">
       <label for="user-select">Select User</label>
@@ -24,14 +33,16 @@
     <div id="result" class="result">Loading local dataset...</div>
 
     <footer class="footer">
-      <small>Dataset: local u.item &amp; u.data (place them in the same folder as index.html)</small>
+      <small>
+        Dataset: <code>u.item</code> &amp; <code>u.data</code> (place them in the same folder as this page)
+      </small>
     </footer>
   </main>
 
   <!-- TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
-  <!-- App code -->
+  <!-- App scripts -->
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
