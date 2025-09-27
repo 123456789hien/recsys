@@ -1,7 +1,5 @@
-/* data.js
-   ✅ ĐÃ CHỈNH SỬA: loadData() giờ đọc trực tiếp u.item và u.data từ cùng thư mục với index.html
-   Chỉ cần đặt u.item và u.data trong cùng folder, chạy index.html bằng HTTP server (hoặc Live Server).
-*/
+// data.js
+// Reads u.item and u.data from the same folder as index.html.
 
 let moviesMap = {};
 let ratings = [];
@@ -25,6 +23,7 @@ function parseRatingData(text) {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l);
   const userSet = new Set();
   const movieSet = new Set();
+
   for (const line of lines) {
     const parts = line.split(/\s+/);
     if (parts.length < 3) continue;
@@ -41,26 +40,20 @@ function parseRatingData(text) {
 }
 
 /**
- * loadData() — phiên bản LOCAL
- * Đọc trực tiếp file 'u.item' và 'u.data' từ cùng thư mục.
- * ⚠️ Quan trọng: bạn cần chạy trang web qua HTTP server, không phải mở trực tiếp file://
- * Nếu dùng VSCode, chỉ cần cài Live Server extension, bấm "Go Live".
+ * Loads u.item and u.data locally.
+ * Requires running this page through a local HTTP server
+ * (not file://) to avoid fetch/CORS issues.
  */
 async function loadData() {
   const itemResp = await fetch('u.item');
-  if (!itemResp.ok) throw new Error(`Không thể đọc u.item (HTTP ${itemResp.status})`);
+  if (!itemResp.ok) throw new Error(`Cannot load u.item (HTTP ${itemResp.status})`);
   parseItemData(await itemResp.text());
 
   const dataResp = await fetch('u.data');
-  if (!dataResp.ok) throw new Error(`Không thể đọc u.data (HTTP ${dataResp.status})`);
+  if (!dataResp.ok) throw new Error(`Cannot load u.data (HTTP ${dataResp.status})`);
   parseRatingData(await dataResp.text());
 
-  if (!ratings.length) throw new Error('Không đọc được rating từ u.data');
+  if (!ratings.length) throw new Error('No rating data found in u.data');
 
-  return {
-    numUsers,
-    numMovies,
-    numRatings: ratings.length,
-    moviesMap,
-  };
+  return { numUsers, numMovies, numRatings: ratings.length, moviesMap };
 }
