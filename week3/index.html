@@ -9,7 +9,7 @@
 <body>
   <main class="card">
     <h1>Matrix Factorization Movie Recommender</h1>
-    <p class="lead">Train a lightweight matrix-factorization model entirely in your browser using TensorFlow.js and MovieLens 100K.</p>
+    <p class="lead">Train a lightweight matrix-factorization model entirely in your browser using TensorFlow.js and local MovieLens 100K files.</p>
 
     <div class="controls">
       <label for="user-select">Select User</label>
@@ -21,20 +21,17 @@
       <button id="predict-btn">Predict Rating</button>
     </div>
 
-    <div id="result" class="result">
-      <!-- Status messages and prediction results will appear here -->
-      Loading...
-    </div>
+    <div id="result" class="result">Loading local dataset...</div>
 
     <footer class="footer">
-      <small>Implementation: in-browser training with TensorFlow.js • Dataset: MovieLens 100K (u.item &amp; u.data)</small>
+      <small>Dataset: local u.item &amp; u.data (place them in the same folder as index.html)</small>
     </footer>
   </main>
 
-  <!-- TensorFlow.js CDN (required) -->
+  <!-- TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
-  <!-- App modular code: data loader then main script -->
+  <!-- App code -->
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
