@@ -26,7 +26,7 @@ function parseRatingData(text) {
   const movieSet = new Set();
 
   for (const line of lines) {
-    const parts = line.split(/\s+/);
+    const parts = line.split('\t'); // dùng tab cho chuẩn
     if (parts.length < 3) continue;
     const userId = parseInt(parts[0], 10);
     const movieId = parseInt(parts[1], 10);
@@ -36,8 +36,8 @@ function parseRatingData(text) {
     userSet.add(userId);
     movieSet.add(movieId);
   }
-  numUsers = userSet.size ? Math.max(...userSet) : 0;
-  if (numMovies === 0) numMovies = movieSet.size ? Math.max(...movieSet) : 0;
+  numUsers = Math.max(...userSet);
+  if (numMovies === 0) numMovies = Math.max(...movieSet);
   console.log('parseRatingData -> ratings:', ratings.length, 'numUsers:', numUsers, 'numMovies:', numMovies);
 }
 
