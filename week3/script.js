@@ -1,7 +1,8 @@
-/* script.js — giống bản trước, chỉ tinh chỉnh message hiển thị */
+// script.js
+// Handles training & prediction with TensorFlow.js
 
 let model = null;
-let _loadedMeta = null;
+let meta = null;
 
 function setStatus(msg) {
   document.getElementById('result').textContent = msg;
@@ -13,16 +14,17 @@ function populateDropdowns() {
   userSelect.innerHTML = '';
   movieSelect.innerHTML = '';
 
-  for (let u = 1; u <= _loadedMeta.numUsers; u++) {
+  for (let u = 1; u <= meta.numUsers; u++) {
     const opt = document.createElement('option');
     opt.value = u;
     opt.textContent = `User ${u}`;
     userSelect.appendChild(opt);
   }
-  for (let m = 1; m <= _loadedMeta.numMovies; m++) {
+
+  for (let m = 1; m <= meta.numMovies; m++) {
     const opt = document.createElement('option');
     opt.value = m;
-    opt.textContent = _loadedMeta.moviesMap[m] ? `${m} — ${_loadedMeta.moviesMap[m]}` : `Movie ${m}`;
+    opt.textContent = meta.moviesMap[m] ? `${m} — ${meta.moviesMap[m]}` : `Movie ${m}`;
     movieSelect.appendChild(opt);
   }
 }
@@ -31,18 +33,18 @@ function createModel(numUsers, numMovies, latentDim = 20) {
   const userInput = tf.input({ shape: [1], name: 'userInput', dtype: 'int32' });
   const movieInput = tf.input({ shape: [1], name: 'movieInput', dtype: 'int32' });
 
-  const userEmbeddingLayer = tf.layers.embedding({ inputDim: numUsers + 1, outputDim: latentDim, inputLength: 1 });
-  const movieEmbeddingLayer = tf.layers.embedding({ inputDim: numMovies + 1, outputDim: latentDim, inputLength: 1 });
+  const userEmbedding = tf.layers.embedding({ inputDim: numUsers + 1, outputDim: latentDim, inputLength: 1 });
+  const movieEmbedding = tf.layers.embedding({ inputDim: numMovies + 1, outputDim: latentDim, inputLength: 1 });
 
-  const userBiasLayer = tf.layers.embedding({ inputDim: numUsers + 1, outputDim: 1, inputLength: 1 });
-  const movieBiasLayer = tf.layers.embedding({ inputDim: numMovies + 1, outputDim: 1, inputLength: 1 });
+  const userBias = tf.layers.embedding({ inputDim: numUsers + 1, outputDim: 1, inputLength: 1 });
+  const movieBias = tf.layers.embedding({ inputDim: numMovies + 1, outputDim: 1, inputLength: 1 });
 
-  const userVec = tf.layers.flatten().apply(userEmbeddingLayer.apply(userInput));
-  const movieVec = tf.layers.flatten().apply(movieEmbeddingLayer.apply(movieInput));
+  const userVec = tf.layers.flatten().apply(userEmbedding.apply(userInput));
+  const movieVec = tf.layers.flatten().apply(movieEmbedding.apply(movieInput));
   const dot = tf.layers.dot({ axes: -1 }).apply([userVec, movieVec]);
 
-  const uBias = tf.layers.flatten().apply(userBiasLayer.apply(userInput));
-  const mBias = tf.layers.flatten().apply(movieBiasLayer.apply(movieInput));
+  const uBias = tf.layers.flatten().apply(userBias.apply(userInput));
+  const mBias = tf.layers.flatten().apply(movieBias.apply(movieInput));
 
   const concat = tf.layers.concatenate().apply([dot, uBias, mBias]);
   const prediction = tf.layers.dense({ units: 1, useBias: true }).apply(concat);
@@ -51,8 +53,8 @@ function createModel(numUsers, numMovies, latentDim = 20) {
 }
 
 async function trainModel() {
-  setStatus('Đang tạo mô hình...');
-  model = createModel(_loadedMeta.numUsers, _loadedMeta.numMovies);
+  setStatus('Building the model...');
+  model = createModel(meta.numUsers, meta.numMovies);
   model.compile({ optimizer: tf.train.adam(0.001), loss: 'meanSquaredError' });
 
   const shuffled = tf.util.shuffle(ratings.slice());
@@ -70,7 +72,7 @@ async function trainModel() {
   const movieTensor = tf.tensor2d(moviesArr, [moviesArr.length, 1], 'int32');
   const labelTensor = tf.tensor2d(labelsArr, [labelsArr.length, 1], 'float32');
 
-  setStatus('Đang huấn luyện mô hình với dữ liệu cục bộ...');
+  setStatus('Training model on local data...');
   await model.fit({ userInput: userTensor, movieInput: movieTensor }, labelTensor, {
     epochs: 8,
     batchSize: 64,
@@ -87,33 +89,39 @@ async function trainModel() {
   movieTensor.dispose();
   labelTensor.dispose();
 
-  setStatus('Huấn luyện xong! Hãy chọn user & movie và bấm Predict.');
+  setStatus('Training complete! Select a user & movie and press Predict.');
 }
 
 async function predictRating() {
-  if (!model) return setStatus('Mô hình chưa sẵn sàng.');
+  if (!model) return setStatus('Model is not ready yet.');
   const userId = parseInt(document.getElementById('user-select').value, 10);
   const movieId = parseInt(document.getElementById('movie-select').value, 10);
-  setStatus(`Đang dự đoán rating cho User ${userId}, Movie ${movieId}...`);
+
+  setStatus(`Predicting rating for User ${userId}, Movie ${movieId}...`);
 
   const uTensor = tf.tensor2d([userId], [1, 1], 'int32');
   const mTensor = tf.tensor2d([movieId], [1, 1], 'int32');
   const out = model.predict({ userInput: uTensor, movieInput: mTensor });
   const outData = await out.data();
-  let pred = Math.min(5, Math.max(1, outData[0]));
-  setStatus(`Kết quả dự đoán: ${pred.toFixed(2)} / 5`);
-  uTensor.dispose(); mTensor.dispose(); out.dispose();
+  const pred = Math.min(5, Math.max(1, outData[0]));
+
+  setStatus(`Predicted rating: ${pred.toFixed(2)} / 5`);
+
+  uTensor.dispose();
+  mTensor.dispose();
+  out.dispose();
 }
 
-window.onload = async function () {
+window.onload = async () => {
   document.getElementById('predict-btn').addEventListener('click', predictRating);
+
   try {
-    setStatus('Đang tải u.item & u.data từ thư mục hiện tại...');
-    _loadedMeta = await loadData();
+    setStatus('Loading u.item & u.data from local folder...');
+    meta = await loadData();
     populateDropdowns();
     await trainModel();
   } catch (err) {
     console.error(err);
-    setStatus('Lỗi đọc dữ liệu. Hãy chắc rằng u.item và u.data nằm cùng thư mục với index.html và mở bằng HTTP server.');
+    setStatus('Error loading data. Ensure u.item and u.data are in the same folder and open the app via an HTTP server.');
   }
 };
