@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix Factorization Movie Recommender</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>🎬 Movie Recommender</h1>
+
+    <div class="selectors">
+      <label for="user-select">Select User:</label>
+      <select id="user-select"></select>
+
+      <label for="movie-select">Select Movie:</label>
+      <select id="movie-select"></select>
+    </div>
+
+    <button id="predict-btn" onclick="predictRating()" disabled>Predict Rating</button>
+
+    <div id="status">Loading...</div>
+    <div id="result"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
