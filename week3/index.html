@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix Factorization Movie Recommender</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>🎬 Movie Recommender</h1>
+
+    <div class="selectors">
+      <label for="user-select">Select User:</label>
+      <select id="user-select"></select>
+
+      <label for="movie-select">Select Movie:</label>
+      <select id="movie-select"></select>
+    </div>
+
+    <button id="predict-btn" onclick="predictRating()" disabled>Predict Rating</button>
+
+    <!-- Status (shows training epoch messages and final success) -->
+    <div id="status">Loading...</div>
+
+    <!-- Prediction result output -->
+    <div id="result"></div>
+  </div>
+
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+
+  <!-- Data loader (must be loaded before script.js) -->
+  <script src="data.js"></script>
+  <!-- Main script (model, training, prediction) -->
+  <script src="script.js"></script>
+</body>
+</html>
