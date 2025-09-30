@@ -1,0 +1,48 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Two-Tower MovieLens 100K Demo</title>
+<style>
+  body { font-family: Arial, sans-serif; background-color: #f4f6f8; margin: 0; padding: 0; }
+  header { background-color: #2c3e50; color: white; padding: 1rem; text-align: center; }
+  main { display: flex; padding: 1rem; gap: 1rem; }
+  #left-panel { flex: 1; background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+  #right-panel { flex: 2; background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); overflow-x:auto; }
+  button { margin: 0.5rem 0.2rem; padding: 0.5rem 1rem; background: #2980b9; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { background: #3498db; }
+  canvas { border: 1px solid #ccc; border-radius: 5px; margin: 0.5rem 0; width: 100%; }
+  table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+  th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+  th { background-color: #2980b9; color: white; }
+  h3 { margin-top: 1rem; }
+  .note { background: #ecf0f1; padding: 0.5rem; border-radius: 5px; margin-top: 1rem; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Two-Tower MovieLens 100K Demo</h1>
+</header>
+<main>
+  <div id="left-panel">
+    <button id="load-data">Load Data</button>
+    <button id="train-model">Train</button>
+    <button id="test-model">Test</button>
+    <h3>Training Monitor</h3>
+    <canvas id="loss-chart" width="400" height="200"></canvas>
+    <h3>Embedding Projection (Sample)</h3>
+    <canvas id="embedding-projection" width="400" height="400"></canvas>
+    <div class="note">
+      <strong>Note:</strong> Training may take several minutes depending on browser. All processing is client-side. Hosting on GitHub Pages requires placing u.data and u.item in /data/ folder.
+    </div>
+  </div>
+  <div id="right-panel">
+    <div id="results"></div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.14.0/dist/tf.min.js"></script>
+<script src="two-tower.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
