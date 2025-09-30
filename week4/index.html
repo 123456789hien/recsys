@@ -1,0 +1,157 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Two-Tower Retrieval Demo — MovieLens 100K (TF.js)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.4em;
+    }
+    main {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      height: calc(100vh - 60px);
+    }
+    /* LEFT PANEL */
+    #sidebar {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+    }
+    section {
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+    }
+    section h3 {
+      margin: 5px 0 8px;
+      font-size: 1.1em;
+      color: #2c3e50;
+    }
+    #controls button {
+      display: block;
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 8px;
+      font-size: 0.95em;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #controls button:hover {
+      background: #2980b9;
+    }
+    canvas {
+      width: 100%;
+      height: 180px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    #note {
+      font-size: 0.9em;
+      line-height: 1.4em;
+      background: #f0f3f5;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    /* RIGHT PANEL */
+    #main-panel {
+      padding: 15px;
+      overflow-y: auto;
+    }
+    #results table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    #results th, #results td {
+      border: 1px solid #ddd;
+      padding: 6px 8px;
+      text-align: left;
+      font-size: 0.9em;
+    }
+    #results th {
+      background: #3498db;
+      color: white;
+    }
+    #results caption {
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-align: left;
+      font-size: 1em;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Two-Tower Retrieval Demo — MovieLens 100K (TF.js)
+  </header>
+
+  <main>
+    <!-- LEFT COLUMN -->
+    <div id="sidebar">
+
+      <section id="controls">
+        <h3>Controls</h3>
+        <button id="loadBtn">Load Data</button>
+        <button id="trainBtn">Train</button>
+        <button id="testBtn">Test</button>
+        <div id="status">Status: Waiting for user action...</div>
+      </section>
+
+      <section>
+        <h3>Training Monitor</h3>
+        <canvas id="lossChart"></canvas>
+      </section>
+
+      <section>
+        <h3>Embedding Projection (sample)</h3>
+        <canvas id="projectionCanvas" width="300" height="300"></canvas>
+      </section>
+
+      <section>
+        <h3>Note</h3>
+        <div id="note">
+          <p>This demo runs fully in your browser.<br>
+          Training on ~80k interactions with embedding dim=32 may take ~1–2 min on laptop CPUs.</p>
+          <p>Works on GitHub Pages — just upload this repo and open <code>index.html</code>.</p>
+          <p>Workflow:<br>
+            1. <b>Load Data</b><br>
+            2. <b>Train</b> → watch live loss and embeddings<br>
+            3. <b>Test</b> → view recommendations vs history
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div id="main-panel">
+      <h3>Recommendation Results</h3>
+      <div id="results"></div>
+    </div>
+  </main>
+
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0/dist/tf.min.js"></script>
+  <!-- App Logic -->
+  <script src="two-tower.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
