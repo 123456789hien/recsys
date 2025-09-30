@@ -1,0 +1,54 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two-Tower MovieLens Demo</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #ffeef6;
+        color: #333;
+        text-align: center;
+        margin: 0; padding: 0;
+    }
+    h1 { color: #ff4d94; margin-top: 20px; }
+    button {
+        background: #ff99c8;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    button:hover { background: #ff66a3; }
+    #status { margin-top: 15px; font-size: 0.95rem; }
+    canvas { margin: 15px auto; background: #fff0f5; border-radius: 8px; display: block; }
+    #results { margin-top: 20px; display: flex; justify-content: center; }
+    table { border-collapse: collapse; margin: 0 15px; width: 300px; background: #fff0f5; border-radius: 8px; }
+    th, td { border: 1px solid #ffb3d9; padding: 5px; text-align: left; font-size: 0.9rem; }
+    th { background: #ffb3d9; color: #fff; }
+    td:hover { background: #ffd6ea; cursor: default; }
+    #chart, #embeddingCanvas { width: 600px; height: 300px; }
+</style>
+</head>
+<body>
+<h1>Two-Tower MovieLens Demo</h1>
+<div>
+    <button id="loadBtn">Load Data</button>
+    <button id="trainBtn">Train</button>
+    <button id="testBtn">Test</button>
+</div>
+<div id="status">Status: Idle</div>
+<canvas id="chart"></canvas>
+<canvas id="embeddingCanvas"></canvas>
+<div id="results"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
+<script src="two-tower.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
