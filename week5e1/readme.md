@@ -1,51 +1,33 @@
-You are asked to implement a PageRank Friend Recommendation App using HTML, D3.js, and TensorFlow.js, maintaining the exact UI/UX as provided in the original HTML. The app should:
+You are asked to implement a PageRank Friend Recommendation App using HTML, D3.js, and TensorFlow.js. The requirements are:
 
-Load default graph data from a CSV file (e.g., data/karate.csv) representing nodes and edges. Each node has a unique numeric ID.
+1. Load a default graph from a CSV file (e.g., data/karate.csv) containing nodes and edges with unique numeric IDs.
+2. Render an interactive network graph with D3.js, supporting:
+   - Force-directed layout
+   - Zoom and pan
+   - Node drag
+   - Node size proportional to PageRank
+   - Node color representing PageRank
+3. Compute PageRank scores entirely client-side using TensorFlow.js with 50 iterations and a damping factor of 0.85.
+4. Display a node table showing:
+   - Node ID
+   - PageRank score
+   - Current friends
+   - Table sorted descending by PageRank
+5. When a user clicks a node (graph or table):
+   - Highlight the node
+   - Show node details, including current friends
+   - Recommend top 3 new friends by PageRank (excluding existing friends) with a "Connect" button for each
+6. Clicking "Connect":
+   - Adds a bidirectional edge between nodes
+   - Recomputes PageRank
+   - Updates both table and graph dynamically
+7. Clicking "Reset Graph" restores the original graph and clears all selections.
+8. Handle errors gracefully, including CSV loading or PageRank computation issues.
+9. All computation and interactions must occur entirely in the browser; no backend or server communication.
+10. Maintain clean modular code in 4 files:
+    - index.html: unchanged layout and UI/UX
+    - app.js: main logic for graph, PageRank, table, selection, and recommendations
+    - pagerank.js: TensorFlow.js PageRank computation
+    - graph.js: D3.js graph rendering and interaction
 
-Display an interactive network graph with D3.js, including:
-
-Force-directed layout
-
-Zoom and pan support
-
-Drag nodes to reposition
-
-Node size proportional to PageRank
-
-Node color indicating PageRank
-
-Compute PageRank scores using TensorFlow.js on the client side with default parameters (50 iterations, damping factor 0.85).
-
-Populate a node table showing:
-
-Node ID
-
-PageRank score
-
-Current friends
-
-Table sorted descending by PageRank
-
-When a user clicks a node in the graph or table:
-
-Highlight the selected node
-
-Show node details in the panel, including current friends
-
-Recommend top 3 new friends by PageRank (excluding existing friends) with a “Connect” button for each
-
-Clicking “Connect”:
-
-Adds a bidirectional edge to the graph
-
-Recomputes PageRank dynamically
-
-Updates the table and graph visualization
-
-Clicking Reset Graph restores the original default graph and clears all selections.
-
-All features must work entirely client-side, without backend or server connections.
-
-Handle any errors gracefully in the console and via alerts (e.g., CSV loading failure or PageRank computation errors).
-
-Maintain exact UI/UX, styling, layout, and controls from the original HTML provided by the professor.
+The final app must be fully functional, error-free, and exactly match the professor’s UI/UX while implementing all features including table sorting, top 3 friend recommendations, node highlighting, and dynamic PageRank recomputation.
