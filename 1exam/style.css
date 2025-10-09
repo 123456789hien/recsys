@@ -1,0 +1,84 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe6f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #d63384;
+}
+
+h2 {
+    color: #d63384;
+    margin-top: 20px;
+}
+
+.filter-section, .embeddings-section, .history-section, .recommendation-section {
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #d63384;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #b32e73;
+}
+
+select {
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: #f8cce0;
+}
+
+.note {
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
+}
+
+.notes-panel {
+    margin-top: 30px;
+    background-color: #fff0f5;
+    padding: 15px;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #d63384;
+}
