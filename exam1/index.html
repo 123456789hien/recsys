@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personalised Fashion Recommender</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+    <header>
+        <h1>💖 Personalised Fashion Recommender</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#eda">EDA</a></li>
+            <li><a href="#recSys">RecSys</a></li>
+            <li><a href="#data">Datasets</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="eda">
+            <h2>Exploratory Data Analysis (EDA)</h2>
+            <p>Visualizations and insights from our dataset to understand trends, patterns, and outliers.</p>
+            <a href="notebooks/recsys_midterm.ipynb" target="_blank">Open Notebook</a>
+        </section>
+
+        <section id="recSys">
+            <h2>Recommendation System Modelling</h2>
+            <p><strong>Method:</strong> User-Item Collaborative Filtering + Item Metadata Filtering</p>
+            <p><strong>Justification:</strong> Our dataset is medium-sized, contains clear interactions and item info. CF allows personalized suggestions without heavy complexity. Item metadata improves cold-start recommendations.</p>
+            <p><strong>UI/UX Consideration:</strong> Tone pink, clean layout, easy navigation, intuitive menu for users to explore EDA, recommendations, and datasets.</p>
+            <p><strong>Connection with EDA:</strong> EDA informs feature selection (popular items, active users), highlighting patterns in user behavior.</p>
+        </section>
+
+        <section id="data">
+            <h2>Dataset Files</h2>
+            <ul>
+                <li><a href="data/raw/interactions.csv" target="_blank">interactions.csv</a></li>
+                <li><a href="data/raw/items.csv" target="_blank">items.csv</a></li>
+                <li><a href="data/raw/users.csv" target="_blank">users.csv</a></li>
+                <li><a href="data/processed/interactions_clean.csv" target="_blank">interactions_clean.csv</a></li>
+                <li><a href="data/processed/items_clean.csv" target="_blank">items_clean.csv</a></li>
+                <li><a href="data/processed/users_clean.csv" target="_blank">users_clean.csv</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Sally - Personalised Fashion Recommender</p>
+    </footer>
+
+    <script src="script/main.js"></script>
+</body>
+</html>
