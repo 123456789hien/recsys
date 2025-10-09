@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion Recommender System</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+  <h1>Fashion Recommender System 💖</h1>
+</header>
+
+<main>
+  <!-- Upload Data -->
+  <section class="panel">
+    <h2>Load Data</h2>
+    <input type="file" id="uploadUsers" accept=".csv">
+    <input type="file" id="uploadItems" accept=".csv">
+    <input type="file" id="uploadInteractions" accept=".csv">
+    <div id="noteLoadData" class="note"></div>
+  </section>
+
+  <!-- Filter Users by Location -->
+  <section class="panel">
+    <h2>Filter Users</h2>
+    <div id="locationButtons"></div>
+    <select id="userSelect"><option value="">Select User</option></select>
+    <div id="noteFilterUsers" class="note"></div>
+  </section>
+
+  <!-- User Purchase History -->
+  <section class="panel">
+    <h2>User Purchase History</h2>
+    <table id="historyTable">
+      <thead>
+        <tr><th>Item</th><th>Rating</th><th>Price</th><th>Timestamp</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="noteHistory" class="note"></div>
+  </section>
+
+  <!-- Embeddings -->
+  <section class="panel">
+    <h2>Item Embeddings</h2>
+    <button id="downloadTemplate">Download Template Embeddings JSON</button>
+    <input type="file" id="uploadEmbeddings" accept=".json">
+    <div id="noteEmbeddings" class="note"></div>
+  </section>
+
+  <!-- Top-N Recommendations -->
+  <section class="panel">
+    <h2>Top-10 Recommendations</h2>
+    <button id="computeTopN">Compute Top-10 Recommendations</button>
+    <table id="topNTable">
+      <thead>
+        <tr>
+          <th>Best Value</th>
+          <th>Highest Rated</th>
+          <th>Most Similar</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="noteTopN" class="note"></div>
+  </section>
+
+  <!-- EDA Charts -->
+  <section class="panel">
+    <h2>EDA Charts</h2>
+    <canvas id="ratingChart"></canvas>
+    <canvas id="priceChart"></canvas>
+  </section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
