@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Smart Fashion Recommender — Multi-Module</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smart Fashion Recommender 💖</h1>
+      <p class="subtitle">Content-based · Matrix Factorization (TF.js) · Two-Tower retrieval — all client-side.</p>
+    </header>
+
+    <!-- DATA LOAD -->
+    <section class="card">
+      <h2>Data: Upload or Auto-load (from <code>data/processed/</code>)</h2>
+      <div class="row">
+        <button id="btn-open-upload" class="btn primary">Upload Data Files</button>
+        <button id="btn-auto-load" class="btn secondary">Auto-load from repo (data/processed)</button>
+      </div>
+
+      <div id="upload-panel" class="upload-panel hidden">
+        <label>users_clean.csv (users)</label><input id="f-users" type="file" accept=".csv">
+        <label>items_clean.csv (items)</label><input id="f-items" type="file" accept=".csv">
+        <label>interactions_clean.csv (interactions)</label><input id="f-inter" type="file" accept=".csv">
+        <label>Optional: embeddings JSON (precomputed)</label><input id="f-emb" type="file" accept=".json">
+        <div class="note" id="note-upload">Upload the CSVs (or press Auto-load).</div>
+      </div>
+
+      <ul id="load-status" class="status-list">
+        <li id="st-users">Users: waiting</li>
+        <li id="st-items">Items: waiting</li>
+        <li id="st-inter">Interactions: waiting</li>
+        <li id="st-emb">Embeddings: optional</li>
+      </ul>
+    </section>
+
+    <!-- CONTENT-BASED -->
+    <section class="card module">
+      <h2>Content-Based Item Recommender</h2>
+      <p>Select an item you like, we'll find similar ones (tokenized description/title, Jaccard similarity).</p>
+
+      <div class="row">
+        <label for="cb-item-select">Select item:</label>
+        <select id="cb-item-select" class="select"></select>
+        <button id="cb-find" class="btn primary">Find Similar</button>
+      </div>
+
+      <div id="cb-note" class="note"></div>
+      <div class="table-wrap">
+        <table id="cb-table"><thead><tr><th>Rank</th><th>ID</th><th>Name</th><th>Jaccard</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <!-- MATRIX FACTORIZATION -->
+    <section class="card module">
+      <h2>Matrix Factorization (in-browser with TensorFlow.js)</h2>
+      <p>Train a simple low-rank matrix factorization model on interactions. See epoch progress and predict rating.</p>
+
+      <div class="row">
+        <label for="mf-user-select">Select User:</label>
+        <select id="mf-user-select" class="select small"></select>
+
+        <label for="mf-item-select">Select Item:</label>
+        <select id="mf-item-select" class="select small"></select>
+
+        <label for="mf-epochs">Epochs:</label>
+        <input id="mf-epochs" type="number" min="1" max="200" value="12" class="num">
+
+        <button id="mf-train" class="btn primary">Train MF</button>
+        <button id="mf-predict" class="btn secondary" disabled>Predict Rating</button>
+      </div>
+
+      <div id="mf-status" class="note">Model not trained yet.</div>
+      <canvas id="mf-loss-chart" height="120"></canvas>
+      <div id="mf-pred-note" class="note"></div>
+    </section>
+
+    <!-- TWO-TOWER -->
+    <section class="card module">
+      <h2>Two-Tower Retrieval Demo (TF.js)</h2>
+      <p>Load data → Train two-tower (user & item MLP) → Test. Training shows live loss chart & epoch progress. After training you get a 2D projection of item embeddings and a side-by-side recommendation test.</p>
+
+      <div class="row">
+        <button id="tt-load" class="btn primary">Load Data (for Two-Tower)</button>
+        <button id="tt-train" class="btn primary" disabled>Train Two-Tower</button>
+        <button id="tt-test" class="btn secondary" disabled>Test (random user ≥20 ratings)</button>
+      </div>
+
+      <div id="tt-status" class="note">Two-Tower idle.</div>
+      <canvas id="tt-loss-chart" height="120"></canvas>
+      <div id="tt-embed-proj" class="embed-proj"></div>
+
+      <div id="tt-test-results" class="table-wrap hidden">
+        <h3>Test: Compare (Left=Historical Top10, Middle=Top10 Basic, Right=Top10 DL)</h3>
+        <div class="three-col">
+          <table id="tt-left"><thead><tr><th>Rank</th><th>Item</th><th>Rating/Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+          <table id="tt-mid"><thead><tr><th>Rank</th><th>Item</th><th>Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+          <table id="tt-right"><thead><tr><th>Rank</th><th>Item</th><th>Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOBAL EDA -->
+    <section class="card module">
+      <h2>EDA: Rating vs Price (All Items)</h2>
+      <p>Scatter plot: x = price, y = avg rating. Click a point to highlight item in UI.</p>
+      <canvas id="eda-scatter" height="300"></canvas>
+      <div id="eda-note" class="note"></div>
+    </section>
+
+    <footer class="footer">
+      <small>Project built client-side — Content-based (recsys_w2), Matrix Factorization (recsys_w3), Two-Tower Retrieval (recsys_w4). PageRank ideas (recsys_w5) can be added as a co-purchase graph extension.</small>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
