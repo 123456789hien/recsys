@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Smart Fashion Recommender</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for EDA -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- PapaParse for robust CSV parsing (large files) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smart Fashion Recommender</h1>
+      <p class="subtitle">Personalized fashion suggestions — combining similarity, ratings & price.</p>
+    </header>
+
+    <!-- DATA LOAD / SOURCE -->
+    <section class="card horizontal">
+      <div class="col">
+        <h2>Data (upload or auto-load)</h2>
+        <div class="upload-row">
+          <label class="btn file-btn">Upload users_clean.csv
+            <input id="file-users" type="file" accept=".csv" />
+          </label>
+          <span id="note-users" class="note-inline"></span>
+        </div>
+        <div class="upload-row">
+          <label class="btn file-btn">Upload items_clean.csv
+            <input id="file-items" type="file" accept=".csv" />
+          </label>
+          <span id="note-items" class="note-inline"></span>
+        </div>
+        <div class="upload-row">
+          <label class="btn file-btn">Upload interactions_clean.csv
+            <input id="file-interactions" type="file" accept=".csv" />
+          </label>
+          <span id="note-interactions" class="note-inline"></span>
+        </div>
+
+        <div class="upload-row">
+          <label class="btn file-btn">Upload embeddings JSON (optional)
+            <input id="file-embeddings" type="file" accept=".json" />
+          </label>
+          <span id="note-embeddings" class="note-inline"></span>
+        </div>
+
+        <p class="hint">If you prefer, place files in <code>data/processed/</code> in repo and the app will auto-load on page open.</p>
+      </div>
+
+      <div class="col">
+        <h2>Data Source Status</h2>
+        <ul id="status-list" class="status-list">
+          <li id="status-users">Users — waiting</li>
+          <li id="status-items">Items — waiting</li>
+          <li id="status-interactions">Interactions — waiting</li>
+          <li id="status-emb">Embeddings — optional</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FILTER + ITEM SELECT -->
+    <section class="card">
+      <h2>Filter Users by Location</h2>
+      <div id="location-buttons" class="location-buttons">
+        <button class="btn light" data-loc="All">All Locations</button>
+      </div>
+      <div id="note-location" class="note-inline"></div>
+
+      <h3>Select Item</h3>
+      <select id="select-item" class="select-large">
+        <option value="">-- Choose an item --</option>
+      </select>
+      <div id="note-item" class="note-inline"></div>
+    </section>
+
+    <!-- PURCHASE HISTORY OF ITEM -->
+    <section class="card">
+      <h2 id="history-title">Purchase History of Item: <span id="history-item-name">—</span></h2>
+      <div class="table-wrap">
+        <table id="item-history-table">
+          <thead>
+            <tr><th>User_ID</th><th>Rating</th><th>Price</th><th>Timestamp</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="note-history" class="note-inline"></div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="card">
+      <h2>Top-10 Recommendations (global)</h2>
+      <p class="small">Top items selected by combining <strong>similarity</strong> (embedding or co-purchase), <strong>average rating</strong> and <strong>price</strong>.</p>
+      <div class="actions">
+        <button id="btn-recommend" class="btn">Get Top-10 Recommendations</button>
+        <select id="weight-profile" class="select-small" title="Weight profile">
+          <option value="balanced">Balanced (sim 0.5, rating 0.4, price 0.1)</option>
+          <option value="rating-heavy">Rating heavy (sim 0.3, rating 0.6, price 0.1)</option>
+          <option value="similarity-heavy">Similarity heavy (sim 0.7, rating 0.2, price 0.1)</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table id="recommendation-table">
+          <thead>
+            <tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Rating</th><th>Price</th><th>Score</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="note-recom" class="note-inline"></div>
+    </section>
+
+    <!-- EDA Rating & Price Distribution -->
+    <section class="card">
+      <h2>Rating & Price Distribution (Items)</h2>
+      <canvas id="chart-rating-price" width="900" height="420"></canvas>
+      <div id="note-eda" class="note-inline"></div>
+    </section>
+
+    <footer class="footer">
+      <small>Project: Smart Fashion Recommender — uses embeddings, collaborative signals & price weighting. Keep it simple — no LLMs, no heavy time-series.</small>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
