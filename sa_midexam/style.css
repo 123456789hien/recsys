@@ -27,7 +27,6 @@ th,td{padding:8px;border:1px solid rgba(230,0,115,0.06);text-align:left}
 th{background:linear-gradient(90deg,#fff,#fff6fb);color:var(--accent)}
 tbody tr:nth-child(even){background:#fff8fb}
 .hidden{display:none}
-.embed-proj{height:220px;border-radius:8px;background:linear-gradient(90deg,#fff,#fff6fb);display:flex;align-items:center;justify-content:center;color:#999;margin-top:10px}
 .charts-row{display:flex;gap:12px;align-items:flex-start}
 .two-charts{display:flex;flex-direction:column;gap:10px}
 .footer{margin-top:18px;color:#666;font-size:13px}
