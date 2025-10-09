@@ -1,0 +1,44 @@
+# 1️⃣ Load data
+import pandas as pd
+interactions = pd.read_csv("../data/raw/interactions.csv")
+items = pd.read_csv("../data/raw/items.csv")
+users = pd.read_csv("../data/raw/users.csv")
+
+# 2️⃣ Data Cleaning / Processing
+interactions_clean = interactions.copy()
+interactions_clean = interactions_clean[interactions_clean['rating']>0]
+interactions_clean.to_csv("../data/processed/interactions_clean.csv", index=False)
+items.to_csv("../data/processed/items_clean.csv", index=False)
+users.to_csv("../data/processed/users_clean.csv", index=False)
+
+# 3️⃣ EDA (visualizations)
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Rating distribution
+plt.figure(figsize=(6,4))
+sns.histplot(interactions_clean['rating'], bins=20, kde=True)
+plt.title("Rating Distribution")
+plt.show()
+
+# Popular items
+top_items = interactions_clean['item_id'].value_counts().head(10)
+plt.figure(figsize=(8,4))
+sns.barplot(x=top_items.index, y=top_items.values)
+plt.title("Top 10 Popular Items")
+plt.xticks(rotation=45)
+plt.show()
+
+# 4️⃣ Simple RecSys Model (Collaborative Filtering)
+from surprise import Dataset, Reader, SVD
+from surprise.model_selection import train_test_split
+from surprise import accuracy
+
+reader = Reader(rating_scale=(interactions_clean['rating'].min(), interactions_clean['rating'].max()))
+data = Dataset.load_from_df(interactions_clean[['user_id','item_id','rating']], reader)
+trainset, testset = train_test_split(data, test_size=0.2, random_state=42)
+
+algo = SVD()  # simple collaborative filtering
+algo.fit(trainset)
+predictions = algo.test(testset)
+accuracy.rmse(predictions)
