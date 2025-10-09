@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Smart Fashion Recommender</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.14.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smart Fashion Recommender 💖</h1>
+      <p class="lead">Content-based · Matrix Factorization (TF.js) · Two-Tower retrieval — client-side demo</p>
+    </header>
+
+    <!-- Step 1: Data -->
+    <section class="card">
+      <h2>Step 1 — Data (Upload / Auto-load)</h2>
+      <div class="row">
+        <button id="btn-upload-toggle" class="btn primary">Upload data files</button>
+        <button id="btn-auto-load" class="btn secondary">Auto-load from repo (data/processed)</button>
+      </div>
+
+      <div id="upload-panel" class="upload-panel hidden">
+        <div class="upload-row">
+          <label>users_clean.csv <input id="file-users" type="file" accept=".csv"></label>
+          <span id="note-users" class="note-inline">not loaded</span>
+        </div>
+        <div class="upload-row">
+          <label>items_clean.csv <input id="file-items" type="file" accept=".csv"></label>
+          <span id="note-items" class="note-inline">not loaded</span>
+        </div>
+        <div class="upload-row">
+          <label>interactions_clean.csv <input id="file-inter" type="file" accept=".csv"></label>
+          <span id="note-inter" class="note-inline">optional</span>
+        </div>
+        <div class="upload-row">
+          <label>item_embeddings.json (optional) <input id="file-emb" type="file" accept=".json"></label>
+          <span id="note-emb" class="note-inline">optional</span>
+        </div>
+      </div>
+
+      <ul class="status-list">
+        <li id="st-users">Users: waiting</li>
+        <li id="st-items">Items: waiting</li>
+        <li id="st-inter">Interactions: waiting</li>
+        <li id="st-emb">Embeddings: waiting</li>
+      </ul>
+    </section>
+
+    <!-- Step 2: Filter Users / Select Item -->
+    <section class="card">
+      <h2>Step 2 — Filter Users by Location & Select Item</h2>
+      <div class="row">
+        <label>Filter Location:</label>
+        <select id="location-filter" class="select"></select>
+        <span id="note-location" class="note-inline"></span>
+      </div>
+      <div class="row">
+        <label>Select Item:</label>
+        <select id="select-item" class="select-large"></select>
+        <span id="note-item" class="note-inline"></span>
+      </div>
+    </section>
+
+    <!-- Step 3: Purchase History of Item -->
+    <section class="card">
+      <h2>Step 3 — Purchase History of Item: <span id="item-name-display">None</span></h2>
+      <table id="history-table">
+        <thead><tr><th>User_ID</th><th>Rating</th><th>Price</th><th>Timestamp</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="row">
+        <label>Upload embeddings JSON (if not uploaded earlier):</label>
+        <input id="file-emb-2" type="file" accept=".json">
+        <span id="note-emb2" class="note-inline"></span>
+      </div>
+    </section>
+
+    <!-- Step 4: EDA -->
+    <section class="card">
+      <h2>Step 4 — EDA: Rating & Price distribution</h2>
+      <div class="charts-row">
+        <canvas id="eda-scatter" height="240"></canvas>
+        <div class="two-charts">
+          <canvas id="hist-rating" height="120"></canvas>
+          <canvas id="hist-price" height="120"></canvas>
+        </div>
+      </div>
+      <div id="note-eda" class="note-inline"></div>
+    </section>
+
+    <!-- Step 5: Content-based -->
+    <section class="card">
+      <h2>Content-Based Item Recommender</h2>
+      <p>Select an item you like, and we'll find similar ones for you.</p>
+      <div class="row">
+        <select id="cb-item-select" class="select-large"></select>
+        <button id="btn-cb" class="btn primary">Find Similar</button>
+        <span id="note-cb" class="note-inline"></span>
+      </div>
+      <table id="cb-table">
+        <thead><tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Similarity</th><th>Avg Rating</th><th>Price</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Step 6: Matrix Factorization -->
+    <section class="card">
+      <h2>Matrix Factorization (TF.js)</h2>
+      <div class="row">
+        <label>Select User:</label>
+        <select id="mf-user" class="select"></select>
+        <label>Select Item:</label>
+        <select id="mf-item" class="select"></select>
+        <label>Epochs:</label><input id="mf-epochs" type="number" value="6" min="1" class="num">
+        <button id="btn-mf-train" class="btn primary">Train MF</button>
+        <button id="btn-mf-predict" class="btn secondary" disabled>Predict Rating</button>
+      </div>
+      <div id="mf-status" class="note-inline">MF idle</div>
+      <canvas id="mf-loss" height="120"></canvas>
+      <div id="mf-pred" class="note-inline"></div>
+    </section>
+
+    <!-- Step 7: Two-Tower -->
+    <section class="card">
+      <h2>Two-Tower Retrieval (TF.js)</h2>
+      <div class="row">
+        <button id="tt-load" class="btn primary">Prepare Two-Tower</button>
+        <button id="tt-train" class="btn primary" disabled>Train Two-Tower</button>
+        <button id="tt-test" class="btn secondary" disabled>Test</button>
+      </div>
+      <div id="tt-status" class="note-inline">idle</div>
+      <canvas id="tt-loss" height="120"></canvas>
+      <div id="tt-results" class="hidden">
+        <h4>Test Results (Left: historical — Middle: basic — Right: Two-Tower)</h4>
+        <div class="three-col">
+          <table id="tt-left"><thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Rating</th></tr></thead><tbody></tbody></table>
+          <table id="tt-mid"><thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody></table>
+          <table id="tt-right"><thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 8: Top-N global -->
+    <section class="card">
+      <h2>Top-10 Recommendations (global)</h2>
+      <div class="row">
+        <label>Profile:</label>
+        <select id="topn-profile" class="select">
+          <option value="balanced">Balanced (sim 0.5, rating 0.4, price 0.1)</option>
+          <option value="rating">Rating heavy</option>
+          <option value="similarity">Similarity heavy</option>
+        </select>
+        <button id="btn-topn" class="btn primary">Compute Top-10</button>
+        <span id="note-topn" class="note-inline"></span>
+      </div>
+      <table id="topn-table">
+        <thead><tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Avg Rating</th><th>Price</th><th>Score</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      <p>Tip: For large datasets (>100k), precompute item embeddings in Python and upload item_embeddings.json for best UX.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
