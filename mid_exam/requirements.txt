@@ -1,0 +1,13 @@
+pandas>=1.5
+numpy>=1.23
+scipy
+scikit-learn
+implicit
+streamlit
+matplotlib
+seaborn
+tqdm
+joblib
+
+
+dataset: https://www.kaggle.com/datasets/carrie1/ecommerce-data/data
