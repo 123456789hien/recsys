@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Fashion Retail Recommender — Full</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fashion Retail Recommender</h1>
+            <p class="subtitle">Personalized Top-N recommendations — Collaborative filtering + precomputed Two-Tower embeddings + price & rating weighting</p>
+        </header>
+
+        <!-- FILTERS -->
+        <section class="card">
+            <h2>1) Filter Users by Location</h2>
+            <div id="location-buttons" class="btn-row"></div>
+            <p id="location-note" class="note-inline"></p>
+        </section>
+
+        <section class="card">
+            <h2>2) Select User</h2>
+            <select id="user-select">
+                <option value="">-- Select User ID --</option>
+            </select>
+            <p id="user-note" class="note-inline"></p>
+        </section>
+
+        <!-- HISTORY -->
+        <section class="card">
+            <h2>3) User Purchase History</h2>
+            <div class="table-wrap">
+                <table id="history-table">
+                    <thead><tr><th>#</th><th>Item ID</th><th>Name</th><th>Price</th><th>Rating</th><th>Timestamp</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- EMBEDDINGS -->
+        <section class="card">
+            <h2>4) Two-Tower Embeddings (precomputed)</h2>
+            <div class="emb-row">
+                <button id="download-template">⬇️ Download Embeddings Template</button>
+                <input id="upload-embeddings" type="file" accept=".json" />
+            </div>
+            <p id="embedding-note" class="note-inline"></p>
+            <p class="small">Template is { "ITEM_ID": [float,...], ... }. Recommended dim: 16 or 32. Upload item embeddings JSON to enable similarity-based recommendations.</p>
+        </section>
+
+        <!-- RECOMMEND -->
+        <section class="card">
+            <h2>5) Compute Top-N Recommendations</h2>
+            <div class="center-row">
+                <button id="compute-btn">🔄 Compute Recommendations</button>
+            </div>
+            <p id="recs-note" class="note-inline"></p>
+
+            <div id="topn-columns" class="three-columns">
+                <div class="column">
+                    <h3>Best Value</h3>
+                    <ol id="best-value-list" class="rec-list"></ol>
+                </div>
+                <div class="column">
+                    <h3>Highest Rated</h3>
+                    <ol id="highest-rated-list" class="rec-list"></ol>
+                </div>
+                <div class="column">
+                    <h3>Most Similar</h3>
+                    <ol id="most-similar-list" class="rec-list"></ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDA -->
+        <section class="card">
+            <h2>6) EDA — Rating & Price (user)</h2>
+            <div class="charts-row">
+                <div class="chart-wrap">
+                    <canvas id="price-chart"></canvas>
+                </div>
+                <div class="chart-wrap">
+                    <canvas id="rating-chart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTES LOG -->
+        <section class="card">
+            <h2>Process Notes</h2>
+            <div id="notes-log" class="notes-log"></div>
+        </section>
+    </div>
+
+    <!-- libs and app -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
