@@ -1,0 +1,50 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffe6f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 { color: #ff3399; text-align: center; }
+h2 { color: #ff66b3; margin-top: 30px; }
+h3 { color: #ff3399; }
+
+input[type="file"] {
+  display: block;
+  margin: 5px 0 10px 0;
+}
+
+label { font-weight: bold; }
+
+.note {
+  font-size: 0.9em;
+  color: green;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ff99cc;
+  padding: 5px;
+  text-align: center;
+}
+
+.recommendations {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rec-column {
+  width: 32%;
+}
