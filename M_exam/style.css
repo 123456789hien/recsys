@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffe6f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff0f5;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1, h3, h4 {
+    text-align: center;
+    color: #d63384;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.filters label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.filters select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #d63384;
+    margin-right: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #b02a6f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+table, th, td {
+    border: 1px solid #d63384;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+.topn-tables {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.table-container {
+    flex: 1;
+    margin: 10px;
+    min-width: 300px;
+}
+
+#notes-panel {
+    background-color: #ffd9e6;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#notes-panel ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
