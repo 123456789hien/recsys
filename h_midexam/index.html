@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Fashion Recommender</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Smart Fashion Recommender</h1>
+
+    <!-- Load / Upload -->
+    <div class="load-section">
+        <button id="autoLoadBtn" class="btn">Auto-Load Data from GitHub</button>
+        <button id="uploadDataBtn" class="btn">Upload Data from Local</button>
+        <div id="status-note" class="note"></div>
+    </div>
+
+    <!-- Upload CSVs & Embeddings -->
+    <div class="upload-section">
+        <label>Upload Users CSV:</label><input type="file" id="uploadUsers" accept=".csv"><div id="noteUsers" class="note"></div>
+        <label>Upload Items CSV:</label><input type="file" id="uploadItems" accept=".csv"><div id="noteItems" class="note"></div>
+        <label>Upload Interactions CSV:</label><input type="file" id="uploadInteractions" accept=".csv"><div id="noteInteractions" class="note"></div>
+        <label>Upload Embeddings JSON:</label><input type="file" id="uploadEmbeddings" accept=".json"><div id="noteEmbeddings" class="note"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-section">
+        <label>Filter Users by Location:</label>
+        <div id="location-buttons" class="button-group"></div>
+
+        <label>Select User:</label>
+        <select id="user-select"><option value="">-- Select User --</option></select>
+
+        <label>Select Item:</label>
+        <select id="item-select"><option value="">-- Select Item --</option></select>
+    </div>
+
+    <!-- Purchase History -->
+    <div id="history-box">
+        <h3>Purchase History of Selected Item:</h3>
+        <table id="history-table">
+            <thead>
+                <tr><th>User_ID</th><th>Rating</th><th>Price</th><th>Timestamp</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Top Recommendations -->
+    <div id="recommendation-box">
+        <h3>Top-10 Recommendations (Global)</h3>
+        <table id="recommendation-table">
+            <thead>
+                <tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Rating</th><th>Price</th><th>Score</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- EDA -->
+    <div id="eda-box">
+        <h3>Rating & Price Distribution of Items</h3>
+        <canvas id="eda-chart" width="800" height="400"></canvas>
+    </div>
+
+    <!-- Content-Based Item Recommender -->
+    <div id="content-based-box">
+        <h3>Content-Based Item Recommender</h3>
+        <label>Select Item You Like:</label>
+        <select id="cb-item-select"><option value="">-- Select Item --</option></select>
+        <button id="cb-btn" class="btn">Find Similar Items</button>
+        <table id="cb-table">
+            <thead>
+                <tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Score</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Matrix Factorization Recommender -->
+    <div id="mf-box">
+        <h3>Matrix Factorization Item Recommender</h3>
+        <label>Select User:</label><select id="mf-user-select"><option value="">-- Select User --</option></select>
+        <label>Select Item:</label><select id="mf-item-select"><option value="">-- Select Item --</option></select>
+        <button id="mf-train-btn" class="btn">Train Model</button>
+        <div id="mf-status" class="note"></div>
+        <button id="mf-predict-btn" class="btn">Predict Rating</button>
+        <div id="mf-predict-note" class="note"></div>
+    </div>
+
+    <!-- Two-Tower Item Recommender -->
+    <div id="two-tower-box">
+        <h3>Two-Tower Item Recommender</h3>
+        <button id="tt-load-btn" class="btn">Load Data</button>
+        <button id="tt-train-btn" class="btn">Train</button>
+        <button id="tt-test-btn" class="btn">Test</button>
+        <div id="tt-status" class="note"></div>
+        <canvas id="tt-loss-chart" width="800" height="200"></canvas>
+        <div id="tt-embedding-plot" class="note">Embedding projection will appear here</div>
+
+        <h4>Test Results (Random User ≥20 ratings)</h4>
+        <div class="tt-tables">
+            <div>
+                <h5>Historical Items</h5>
+                <table id="tt-hist-table">
+                    <thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Score/Rating</th></tr></thead><tbody></tbody>
+                </table>
+            </div>
+            <div>
+                <h5>Basic CF Recommendations</h5>
+                <table id="tt-basic-table">
+                    <thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody>
+                </table>
+            </div>
+            <div>
+                <h5>Two-Tower MLP Recommendations</h5>
+                <table id="tt-mlp-table">
+                    <thead><tr><th>Rank</th><th>Item</th><th>Name</th><th>Score</th></tr></thead><tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connection with EDA -->
+    <div id="eda-connection-box">
+        <h3>Connection with EDA (Optional)</h3>
+        <div id="eda-connection-note" class="note"></div>
+    </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
