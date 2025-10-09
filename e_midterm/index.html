@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Fashion Recommender</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🌸 Smart Fashion Recommender System</h1>
+
+    <div class="section">
+      <h2>1️⃣ Load Clean Data</h2>
+      <button id="loadDataBtn">Load CSV Data</button>
+      <div id="noteLoad" class="note"></div>
+    </div>
+
+    <div class="section">
+      <h2>2️⃣ Filter Users by Location</h2>
+      <select id="locationSelect"></select>
+      <select id="userSelect"></select>
+      <div id="noteFilter" class="note"></div>
+    </div>
+
+    <div class="section">
+      <h2>3️⃣ User Purchase History</h2>
+      <table id="historyTable">
+        <thead><tr><th>Item</th><th>Rating</th><th>Price</th><th>Time</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div id="noteHistory" class="note"></div>
+    </div>
+
+    <div class="section">
+      <h2>4️⃣ Upload Two-Tower Embeddings JSON</h2>
+      <input type="file" id="embeddingUpload" accept=".json" />
+      <div id="noteEmbedding" class="note"></div>
+    </div>
+
+    <div class="section">
+      <h2>5️⃣ EDA Charts</h2>
+      <canvas id="ratingChart"></canvas>
+      <canvas id="priceChart"></canvas>
+      <div id="noteEDA" class="note"></div>
+    </div>
+
+    <div class="section">
+      <h2>6️⃣ Generate Top-N Recommendations</h2>
+      <button id="computeBtn">Compute Recommendations</button>
+      <div id="noteCompute" class="note"></div>
+      <div class="recom-tables">
+        <div>
+          <h3>🏆 Best Value</h3>
+          <table id="bestValueTable"><thead><tr><th>Item</th><th>Price</th><th>Score</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div>
+          <h3>⭐ Highest Rated</h3>
+          <table id="highestRatedTable"><thead><tr><th>Item</th><th>Price</th><th>Score</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div>
+          <h3>💞 Most Similar</h3>
+          <table id="mostSimilarTable"><thead><tr><th>Item</th><th>Price</th><th>Similarity</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
