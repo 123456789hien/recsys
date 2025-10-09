@@ -1,0 +1,100 @@
+body {
+    font-family: 'Helvetica', Arial, sans-serif;
+    background-color: #fff0f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1, h3 {
+    text-align: center;
+    color: #ff69b4;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.controls select, .controls button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.controls button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.controls button:hover {
+    background-color: #ff1493;
+}
+
+.notes-panel {
+    background-color: #fff0f5;
+    border: 1px dashed #ff69b4;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+tr.highlight {
+    background-color: #ffe4e1;
+}
+
+.charts {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+canvas {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 550px;
+    max-height: 350px;
+}
