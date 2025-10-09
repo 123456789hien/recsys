@@ -1,0 +1,64 @@
+/* Pink, clean, modern */
+:root{
+  --pink:#d63384;
+  --pink-2:#ff9ccf;
+  --bg:#fff0f6;
+  --card:#ffffff;
+  --muted:#666;
+}
+*{box-sizing:border-box}
+body{
+  font-family:Inter, "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg);
+  margin:0;
+  color:#222;
+}
+.container{
+  max-width:1100px;
+  margin:28px auto;
+  padding:20px;
+}
+header h1{
+  color:var(--pink);
+  margin:0;
+  text-align:center;
+}
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin-top:6px;
+}
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  margin-top:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.btn-row button{padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer}
+.btn-row button:hover{background:var(--pink-2)}
+select{padding:8px 10px;border-radius:8px;border:1px solid #ddd}
+.emb-row{display:flex;align-items:center;gap:12px}
+.center-row{text-align:center}
+.note-inline{color:var(--muted);margin-top:8px}
+.small{font-size:13px;color:var(--muted)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:8px;border-bottom:1px solid #f2e6eb;text-align:left}
+th{background:linear-gradient(90deg,var(--pink-2),#fff);color:#111}
+.thin{font-weight:400}
+.thick{font-weight:600}
+.three-columns{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.column{flex:1;min-width:260px;background:#fff;border-radius:8px;padding:12px;box-shadow:0 4px 10px rgba(0,0,0,0.03)}
+.rec-list{padding-left:18px;margin:0}
+.rec-list li{margin:8px 0}
+.charts-row{display:flex;gap:12px;flex-wrap:wrap}
+.chart-wrap{flex:1;min-width:300px;background:#fff;padding:8px;border-radius:8px}
+.notes-log{max-height:220px;overflow:auto;padding:8px;background:#fff;border-radius:8px}
+button#compute-btn{background:var(--pink);color:#fff;padding:10px 18px;border-radius:10px;border:none;cursor:pointer}
+button#compute-btn:hover{opacity:0.95}
+@media(max-width:880px){
+  .three-columns{flex-direction:column}
+  .charts-row{flex-direction:column}
+}
