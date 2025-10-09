@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Smart Fashion Recommender — Full</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Smart Fashion Recommender 💖</h1>
+      <p class="subtitle">Content-based · Matrix Factorization (TF.js) · Two-Tower retrieval — runs client-side & GitHub Pages ready.</p>
+    </header>
+
+    <!-- LOAD DATA -->
+    <section class="card">
+      <h2>Step 1 — Load Data</h2>
+      <div class="row">
+        <button id="btn-open-upload" class="btn primary">Upload Data Files</button>
+        <button id="btn-auto-load" class="btn secondary">Auto-load from repository (data/processed)</button>
+      </div>
+
+      <div id="upload-panel" class="upload-panel hidden">
+        <label>users_clean.csv</label><input id="f-users" type="file" accept=".csv">
+        <label>items_clean.csv</label><input id="f-items" type="file" accept=".csv">
+        <label>interactions_clean.csv</label><input id="f-inter" type="file" accept=".csv">
+        <label>Optional: item_embeddings.json</label><input id="f-emb" type="file" accept=".json">
+        <div id="note-upload" class="note">Upload CSVs or use Auto-load.</div>
+      </div>
+
+      <ul id="load-status" class="status-list">
+        <li id="st-users">Users: waiting</li>
+        <li id="st-items">Items: waiting</li>
+        <li id="st-inter">Interactions: waiting</li>
+        <li id="st-emb">Embeddings: optional</li>
+      </ul>
+    </section>
+
+    <!-- FILTER & SELECT -->
+    <section class="card">
+      <h2>Step 2 — Filter Users by Location & Select Item</h2>
+      <div class="row">
+        <div id="location-buttons" class="location-buttons"></div>
+        <div id="location-note" class="note-inline"></div>
+      </div>
+
+      <div class="row">
+        <label for="select-item">Select Item (for content-based / anchor):</label>
+        <select id="select-item" class="select-large"><option value="">-- choose an item --</option></select>
+        <div id="item-note" class="note-inline"></div>
+      </div>
+    </section>
+
+    <!-- CONTENT-BASED -->
+    <section class="card">
+      <h2>Content-Based Item Recommender</h2>
+      <p>Select an item you like and click <em>Find Similar</em>.</p>
+      <div class="row">
+        <button id="cb-find" class="btn primary">Find Similar</button>
+        <div id="cb-note" class="note-inline"></div>
+      </div>
+      <div class="table-wrap">
+        <table id="cb-table"><thead><tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Similarity</th><th>Avg Rating</th><th>Price</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <!-- MATRIX FACTORIZATION -->
+    <section class="card">
+      <h2>Matrix Factorization (TF.js in-browser)</h2>
+      <div class="row">
+        <label for="mf-user">Select User:</label>
+        <select id="mf-user" class="select small"></select>
+
+        <label for="mf-item">Select Item:</label>
+        <select id="mf-item" class="select small"></select>
+
+        <label>Epochs:</label><input id="mf-epochs" class="num" type="number" min="1" value="8">
+        <button id="mf-train" class="btn primary">Train MF</button>
+        <button id="mf-predict" class="btn secondary" disabled>Predict Rating</button>
+      </div>
+
+      <div id="mf-status" class="note">MF model not trained yet.</div>
+      <canvas id="mf-loss" height="120"></canvas>
+      <div id="mf-pred-note" class="note-inline"></div>
+    </section>
+
+    <!-- TWO-TOWER -->
+    <section class="card">
+      <h2>Two-Tower Retrieval Demo (TF.js)</h2>
+      <div class="row">
+        <button id="tt-load" class="btn primary">Load for Two-Tower</button>
+        <button id="tt-train" class="btn primary" disabled>Train Two-Tower</button>
+        <button id="tt-test" class="btn secondary" disabled>Test</button>
+      </div>
+      <div id="tt-status" class="note">Two-Tower idle.</div>
+      <canvas id="tt-loss" height="120"></canvas>
+      <div id="tt-embed-proj" class="embed-proj">Embedding projection will render here after training</div>
+
+      <div id="tt-test-results" class="table-wrap hidden">
+        <h3>Test Results — Left: historical / Middle: basic / Right: Two-Tower</h3>
+        <div class="three-col">
+          <table id="tt-left"><thead><tr><th>Rank</th><th>Item</th><th>Rating/Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+          <table id="tt-mid"><thead><tr><th>Rank</th><th>Item</th><th>Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+          <table id="tt-right"><thead><tr><th>Rank</th><th>Item</th><th>Score</th><th>Year</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOP-N RECOMMENDATIONS -->
+    <section class="card">
+      <h2>Top-10 Recommendations (global)</h2>
+      <div class="row">
+        <label>Weight profile:</label>
+        <select id="weight-profile" class="select small">
+          <option value="balanced">Balanced (sim 0.5, rating 0.4, price 0.1)</option>
+          <option value="rating">Rating heavy (0.2,0.7,0.1)</option>
+          <option value="similarity">Similarity heavy (0.7,0.2,0.1)</option>
+        </select>
+        <button id="btn-topn" class="btn primary">Compute Top-10</button>
+        <div id="note-topn" class="note-inline"></div>
+      </div>
+      <div class="table-wrap">
+        <table id="topn-table">
+          <thead><tr><th>Rank</th><th>ID_Item</th><th>Name</th><th>Avg Rating</th><th>Price</th><th>Score</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EDA -->
+    <section class="card">
+      <h2>EDA — Price vs Avg Rating (All Items)</h2>
+      <canvas id="eda-scatter" height="300"></canvas>
+      <div id="eda-note" class="note-inline"></div>
+    </section>
+
+    <footer class="footer">
+      <small>Smart Fashion Recommender — client-side demo. For large datasets (>200k), precompute embeddings offline.</small>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
