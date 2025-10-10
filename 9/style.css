@@ -1,0 +1,62 @@
+/* style.css - Pink modern aesthetic + responsive layout */
+:root{
+  --pink-1: #fff0f5;
+  --pink-2: #ffb3d9;
+  --pink-3: #ff66b2;
+  --pink-4: #ff1493;
+  --accent: #d63384;
+  --muted: #666;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  margin:0; background:var(--pink-1); color:#222;
+}
+
+.topbar{
+  background: linear-gradient(90deg,var(--pink-4),var(--pink-3));
+  color:#fff; padding:20px 10px; text-align:center;
+}
+.topbar h1{margin:0;font-size:1.6rem}
+.subtitle{margin:6px 0 0; opacity:0.95}
+
+.container{max-width:1100px;margin:18px auto;padding:12px}
+
+.panel{background:#fff;border-radius:12px;padding:14px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.panel h2{color:var(--accent);margin:6px 0 12px;font-size:1.05rem}
+
+.btn{background:var(--pink-4);color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;margin-right:8px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+
+.file-btn{position:relative;overflow:hidden;display:inline-block}
+.file-btn input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}
+
+.select,.input{padding:8px;border-radius:8px;border:1px solid #eee;margin-right:8px}
+
+.btn-group{display:flex;flex-wrap:wrap;gap:8px}
+
+.note{color:var(--muted);margin-top:8px}
+.small{font-size:0.9rem}
+
+.grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.product-card{width:200px;background:#fff;border:1px solid var(--pink-2);border-radius:10px;padding:10px;position:relative;transition:transform .15s,box-shadow .15s}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.badge{position:absolute;top:8px;right:8px;background:orange;color:white;padding:4px 6px;border-radius:6px;font-weight:700;font-size:0.85rem}
+
+.table-wrap{overflow:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border:1px solid #fde6f3;text-align:left}
+th{background:var(--pink-1)}
+
+.chart-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+
+/* responsive */
+@media (max-width:800px){
+  .grid{justify-content:center}
+  .product-card{width:46%}
+}
+@media (max-width:480px){
+  .product-card{width:100%}
+  .chart-row{flex-direction:column}
+}
