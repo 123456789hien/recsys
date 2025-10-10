@@ -1,7 +1,7 @@
 // ===========================
 // Smart Fashion Recommender App
 // ===========================
-const DATA_URL = "https://raw.githubusercontent.com/123456789hien/recsys/refs/heads/main/hs_exam/fashion_recommender.csv";
+const DATA_URL = "https://raw.githubusercontent.com/123456789hien/recsys/refs/heads/main/tkhido_midexam/fashion_recommender.csv";
 
 let allData = [];
 let currentCategory = "All";
