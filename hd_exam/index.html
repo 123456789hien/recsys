@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Fashion Recommender Final</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>👗 Smart Fashion Recommender System</h1>
+    <p class="subtitle">Category-aware, Price & Rating, KNN & Content-based Demo</p>
+  </header>
+
+  <main class="wrap">
+
+    <section class="block">
+      <h2>Data Source</h2>
+      <div class="row">
+        <button id="btnLoad" class="btn primary">Load from GitHub Raw CSV</button>
+        <label class="btn">Upload CSV
+          <input id="fileUpload" type="file" accept=".csv" hidden>
+        </label>
+      </div>
+      <div id="noteData" class="note small">Waiting to load data...</div>
+    </section>
+
+    <section class="block">
+      <h2>1) Select Category</h2>
+      <div class="category-buttons">
+        <button class="category-btn active" data-cat="All">All</button>
+        <button class="category-btn" data-cat="Women's Fashion">Women's</button>
+        <button class="category-btn" data-cat="Men's Fashion">Men's</button>
+        <button class="category-btn" data-cat="Kids' Fashion">Kids'</button>
+      </div>
+      <div id="noteCategory" class="note small"></div>
+    </section>
+
+    <section class="block">
+      <h2>2) Top Recommendations (Category scope)</h2>
+      <div id="topRecommendations" class="cards"></div>
+      <div id="noteTop" class="note small"></div>
+    </section>
+
+    <section class="block">
+      <h2>3) Content-Based Similar Products</h2>
+      <div class="row">
+        <select id="productNameSelect"></select>
+        <button id="btnSimilar" class="btn">Show Similar</button>
+      </div>
+      <div id="similarProducts" class="cards"></div>
+      <div id="noteSimilar" class="note small"></div>
+    </section>
+
+    <section class="block">
+      <h2>4) Exploratory Data Analysis</h2>
+      <div class="charts">
+        <div class="chart-wrap"><canvas id="ratingHist"></canvas></div>
+        <div class="chart-wrap"><canvas id="priceRating"></canvas></div>
+      </div>
+      <p id="edaSummary" class="insight"></p>
+    </section>
+
+    <section class="block">
+      <h2>5) Purchase History by Product Name</h2>
+      <table id="purchaseHistory" class="table">
+        <thead>
+          <tr><th>Product ID</th><th>User ID</th><th>Brand</th><th>Rating</th><th>Price</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="noteHistory" class="note small"></div>
+    </section>
+
+    <section class="block">
+      <h2>6) Predict Rating (KNN)</h2>
+      <div class="row">
+        <input id="inputUser" type="number" placeholder="User ID" />
+        <select id="predictProductSelect"></select>
+        <button id="btnPredict" class="btn">Predict</button>
+      </div>
+      <p id="predictResult" class="insight"></p>
+    </section>
+
+    <section class="block">
+      <h2>7) Top-10 Table</h2>
+      <div class="controls-row">
+        <label>Profile:
+          <select id="profileSelect">
+            <option value="balanced">Balanced</option>
+            <option value="rating">Rating-heavy</option>
+            <option value="similar">Similarity-heavy</option>
+          </select>
+        </label>
+        <button id="btnComputeTopTable" class="btn">Compute Top-10</button>
+      </div>
+      <table id="topTable" class="table">
+        <thead>
+          <tr>
+            <th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th>
+            <th>Rating</th><th>Price</th><th>Color</th><th>Size</th><th>Score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="noteTopTable" class="note small"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Smart Fashion Recommender &mdash; Demo Prototype</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
