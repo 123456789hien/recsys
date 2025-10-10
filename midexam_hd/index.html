@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>👗 Fashion Recommender Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>👗 Fashion Recommender Dashboard</h1>
+
+    <!-- 1️⃣ CATEGORY SELECTION -->
+    <section>
+        <h2>🛍️ 1️⃣ Category Selection</h2>
+        <select id="categorySelect">
+            <option value="All">All</option>
+            <option value="Women">Women</option>
+            <option value="Men">Men</option>
+            <option value="Kids">Kids</option>
+        </select>
+    </section>
+
+    <!-- 2️⃣ TOP RECOMMENDATIONS -->
+    <section>
+        <h2>🔥 2️⃣ Top Recommendations (based on Rating & Price)</h2>
+        <div id="recommendations" class="card-grid"></div>
+    </section>
+
+    <!-- 3️⃣ EXPLORATORY DATA ANALYSIS -->
+    <section>
+        <h2>📊 3️⃣ Exploratory Data Analysis — (by selected category)</h2>
+        <div id="eda">
+            <div id="ratingDist"></div>
+            <div id="priceDist"></div>
+            <div id="priceVsRating"></div>
+            <div id="avgRatingPerBrand"></div>
+        </div>
+        <p class="note">💡 Hover vào các cột hoặc điểm để xem giá trị chi tiết. Dữ liệu tự động cập nhật theo Category.</p>
+    </section>
+
+    <!-- 4️⃣ CONTENT-BASED SIMILAR PRODUCTS -->
+    <section>
+        <h2>🧩 4️⃣ Content-Based Similar Products (cosine similarity)</h2>
+        <select id="productSelect">
+            <option value="">-- Choose Product Name --</option>
+        </select>
+        <button id="showSimilarBtn">Show Similar</button>
+        <div id="similarProducts" class="card-grid"></div>
+        <p class="note">💡 Cosine Similarity dựa trên Rating & Price (normalized) cùng Category & Product Type.</p>
+    </section>
+
+    <!-- 5️⃣ PURCHASE HISTORY -->
+    <section>
+        <h2>📈 5️⃣ Purchase History by Product</h2>
+        <div id="purchaseHistory"></div>
+    </section>
+
+    <!-- 6️⃣ TOP-10 TABLES -->
+    <section>
+        <h2>🏆 6️⃣ Top-10 Tables</h2>
+        <div id="top10Tables"></div>
+        <p class="note">💡 Score = 0.5 × normalized(Rating) + 0.3 × normalized(Price) + 0.2 × random_weight</p>
+    </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
