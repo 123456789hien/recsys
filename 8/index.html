@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Fashion Recommender</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="data.js"></script> <!-- Load data trước app.js -->
+</head>
+<body>
+  <header>
+    <h1>Smart Fashion Recommender</h1>
+    <p>Discover products, get recommendations & predict your ratings!</p>
+  </header>
+
+  <!-- Category Filter -->
+  <section id="category-filter">
+    <h2>Choose Category</h2>
+    <button onclick="filterCategory('Women\'s Fashion')">Women's Fashion</button>
+    <button onclick="filterCategory('Men\'s Fashion')">Men's Fashion</button>
+    <button onclick="filterCategory('Kids\' Fashion')">Kids' Fashion</button>
+  </section>
+
+  <!-- Top Recommendations -->
+  <section id="top-recommendations">
+    <h2>🔥 Top Recommendations</h2>
+    <div id="top-products" class="product-grid"></div>
+  </section>
+
+  <!-- Similar Products -->
+  <section id="similar-products">
+    <h2>Similar Products</h2>
+    <div id="similar-products-grid" class="product-grid"></div>
+  </section>
+
+  <!-- Predict Rating -->
+  <section id="predict-rating">
+    <h2>Predict Your Rating</h2>
+    <input type="number" id="input-user" placeholder="User ID">
+    <input type="number" id="input-product" placeholder="Product ID">
+    <button onclick="predictRating()">Predict Rating</button>
+    <p id="predicted-rating"></p>
+  </section>
+
+  <!-- Purchase History -->
+  <section id="purchase-history">
+    <h2>Purchase History</h2>
+    <div id="history-grid" class="product-grid"></div>
+  </section>
+
+  <!-- EDA Charts -->
+  <section id="eda">
+    <h2>EDA Charts</h2>
+    <canvas id="rating-chart"></canvas>
+    <canvas id="price-rating-chart"></canvas>
+  </section>
+
+  <!-- Top-10 Recommendations -->
+  <section id="top10">
+    <h2>Top-10 Recommendations</h2>
+    <table id="top10-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Brand</th>
+          <th>Rating</th>
+          <th>Price</th>
+          <th>Color</th>
+          <th>Size</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
