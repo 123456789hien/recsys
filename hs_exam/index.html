@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Fashion Recommender</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Smart Fashion Recommender</h1>
+    </header>
+
+    <!-- 1️⃣ Select Category -->
+    <section class="category-section">
+        <h2>1️⃣ Select Category</h2>
+        <div class="buttons">
+            <button class="cat-btn" data-category="All">All</button>
+            <button class="cat-btn" data-category="Women's Fashion">Women's Fashion</button>
+            <button class="cat-btn" data-category="Men's Fashion">Men's Fashion</button>
+            <button class="cat-btn" data-category="Kids' Fashion">Kid's Fashion</button>
+        </div>
+    </section>
+
+    <!-- 2️⃣ Top Recommendations -->
+    <section class="top-recommendations-section">
+        <h2>2️⃣ Top Recommendations (🔥 Category Scope)</h2>
+        <div id="top-recommendations" class="cards-container"></div>
+    </section>
+
+    <!-- 3️⃣ Content-Based Similar Products -->
+    <section class="similar-products-section">
+        <h2>3️⃣ Content-Based Similar Products</h2>
+        <select id="product-select">
+            <option value="">Select Product</option>
+        </select>
+        <button id="show-similar">Show Similar Products</button>
+        <div id="similar-products-container" class="cards-container"></div>
+    </section>
+
+    <!-- 4️⃣ EDA -->
+    <section class="eda-section">
+        <h2>4️⃣ Exploratory Data Analysis</h2>
+        <canvas id="ratingChart"></canvas>
+        <canvas id="priceChart"></canvas>
+    </section>
+
+    <!-- 5️⃣ Purchase History by Product -->
+    <section class="purchase-history-section">
+        <h2>5️⃣ Purchase History by Product</h2>
+        <div id="purchase-history-table"></div>
+    </section>
+
+    <!-- 6️⃣ Predict User Rating -->
+    <section class="predict-rating-section">
+        <h2>6️⃣ Predict User Rating (KNN-based)</h2>
+        <input type="number" id="user-id" placeholder="User ID">
+        <select id="product-id-select">
+            <option value="">Select Product</option>
+        </select>
+        <button id="predict-btn">Predict Rating</button>
+        <div id="prediction-result"></div>
+    </section>
+
+    <!-- 7️⃣ Top-10 Table -->
+    <section class="top10-section">
+        <h2>7️⃣ Top-10 Table</h2>
+        <div id="top10-table"></div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
