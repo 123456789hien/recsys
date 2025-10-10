@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Fashion Recommender</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Smart Fashion Recommender</h1>
+  </header>
+
+  <section class="category-selection">
+    <button class="category-btn" data-category="All">All</button>
+    <button class="category-btn" data-category="Women's Fashion">Women's Fashion</button>
+    <button class="category-btn" data-category="Men's Fashion">Men's Fashion</button>
+    <button class="category-btn" data-category="Kids' Fashion">Kids' Fashion</button>
+  </section>
+
+  <section id="top-recommendations">
+    <h2>Top Recommendations 🔥 (Category Scope)</h2>
+    <div class="cards-container" id="top-cards"></div>
+  </section>
+
+  <section id="eda">
+    <h2>📊 EDA — (by selected category)</h2>
+    <div id="eda-charts">
+      <div id="rating-histogram"></div>
+      <div id="price-histogram"></div>
+      <div id="price-vs-rating"></div>
+      <div id="avg-rating-brand"></div>
+    </div>
+  </section>
+
+  <section id="similar-products">
+    <h2>🧩 Content-Based Similar Products</h2>
+    <label for="product-select">-- choose product name --</label>
+    <select id="product-select"></select>
+    <button id="show-similar">Show Similar Products</button>
+    <div class="cards-container" id="similar-cards"></div>
+  </section>
+
+  <section id="purchase-history">
+    <h2>Purchase History by Product</h2>
+    <table id="purchase-history-table">
+      <thead>
+        <tr>
+          <th>ProductID</th><th>UserID</th><th>Brand</th><th>Rating</th><th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section id="top10">
+    <h2>Top-10 Tables (Category + Product Scope)</h2>
+    <h3>Top 10 by Rating</h3>
+    <table id="top10-rating">
+      <thead>
+        <tr>
+          <th>Rank</th><th>ProductID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Color</th><th>Size</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3>Top 10 by Score</h3>
+    <table id="top10-score">
+      <thead>
+        <tr>
+          <th>Rank</th><th>ProductID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Price</th><th>Color</th><th>Size</th><th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p class="note">Score formula: 0.5 * normalized Rating + 0.3 * normalized Price + 0.2 * random weight (for diversity)</p>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
