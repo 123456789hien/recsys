@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Fashion Recommender</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+</head>
+<body>
+  <h1>👗 Smart Fashion Recommender System</h1>
+
+  <!-- 1️⃣ CATEGORY SELECTION -->
+  <div class="category-buttons">
+    <button class="cat-btn active" data-category="All">All</button>
+    <button class="cat-btn" data-category="Women's Fashion">Women's Fashion</button>
+    <button class="cat-btn" data-category="Men's Fashion">Men's Fashion</button>
+    <button class="cat-btn" data-category="Kids' Fashion">Kids' Fashion</button>
+  </div>
+
+  <!-- 2️⃣ TOP RECOMMENDATIONS -->
+  <section id="top-recommendations">
+    <h2>🔥 Top Recommendations (based on Rating & Price)</h2>
+    <div id="recommendation-container" class="card-container"></div>
+  </section>
+
+  <!-- 3️⃣ EDA CHARTS -->
+  <section id="eda">
+    <h2>📊 Exploratory Data Analysis (by Category)</h2>
+    <p>Hover on bars/points to see details. Automatically updates with category selection.</p>
+    <div id="eda-charts" class="eda-charts">
+      <div id="rating-chart"></div>
+      <div id="price-chart"></div>
+      <div id="scatter-chart"></div>
+    </div>
+  </section>
+
+  <!-- 4️⃣ SIMILAR PRODUCTS -->
+  <section id="similar-products">
+    <h2>🧩 Content-Based Similar Products (Cosine Similarity)</h2>
+    <select id="product-select"></select>
+    <button id="show-similar">Show Similar Products</button>
+    <div id="similar-container" class="card-container"></div>
+  </section>
+
+  <!-- 5️⃣ PURCHASE HISTORY -->
+  <section id="purchase-history">
+    <h2>🛒 Purchase History (by Product & Category)</h2>
+    <table id="history-table">
+      <thead>
+        <tr><th>Product ID</th><th>User ID</th><th>Brand</th><th>Rating</th><th>Price</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- 6️⃣ TOP 10 TABLES -->
+  <section id="top-tables">
+    <h2>🏆 Top 10 Tables</h2>
+    <p>Calculated dynamically per category and selected product.<br>
+    <b>Score = 0.5 × normalized Rating + 0.3 × normalized Price + 0.2 × random weight</b></p>
+
+    <h3>⭐ Top 10 by Rating</h3>
+    <table id="top-rating-table">
+      <thead>
+        <tr><th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Color</th><th>Size</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3>💎 Top 10 by Score</h3>
+    <table id="top-score-table">
+      <thead>
+        <tr><th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Price</th><th>Color</th><th>Size</th><th>Score</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
