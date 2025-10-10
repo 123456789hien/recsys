@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Fashion Recommender</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+    <h1>Smart Fashion Recommender</h1>
+</header>
+
+<section class="category-section">
+    <h2>1️⃣ Select Category</h2>
+    <div class="buttons">
+        <button class="cat-btn" data-category="All">All</button>
+        <button class="cat-btn" data-category="Women's Fashion">Women's Fashion</button>
+        <button class="cat-btn" data-category="Men's Fashion">Men's Fashion</button>
+        <button class="cat-btn" data-category="Kids' Fashion">Kid's Fashion</button>
+    </div>
+</section>
+
+<section class="top-recommendations-section">
+    <h2>2️⃣ Top Recommendations (🔥 Category Scope)</h2>
+    <div id="top-recommendations" class="cards-container"></div>
+</section>
+
+<section class="eda-section">
+    <h2>3️⃣ Exploratory Data Analysis</h2>
+    <canvas id="ratingChart"></canvas>
+    <canvas id="priceChart"></canvas>
+    <p id="eda-note">Note: Charts display data for selected category.</p>
+</section>
+
+<section class="similar-products-section">
+    <h2>4️⃣ Content-Based Similar Products</h2>
+    <select id="product-select">
+        <option value="">Select Product</option>
+    </select>
+    <button id="show-similar">Show Similar Products</button>
+    <div id="similar-products-container" class="cards-container"></div>
+</section>
+
+<section class="purchase-history-section">
+    <h2>5️⃣ Purchase History by Product</h2>
+    <div id="purchase-history-table"></div>
+</section>
+
+<section class="top10-section">
+    <h2>6️⃣ Top-10 Table (Interactive)</h2>
+    <div id="top10-table"></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
