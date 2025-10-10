@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Smart Fashion Recommender</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Smart Fashion Recommender 💖</h1>
+    <p class="subtitle">Category-aware recommendations, content-based similarity, KNN prediction & EDA — client-side & GitHub Pages ready</p>
+  </header>
+
+  <main class="container">
+
+    <!-- Data load / status -->
+    <section class="panel">
+      <div class="panel-row">
+        <button id="btnAutoLoad" class="btn">Auto-load CSV (from repo)</button>
+        <label class="btn file-btn">Upload CSV
+          <input id="fileUpload" type="file" accept=".csv" style="display:none" />
+        </label>
+        <div id="noteGlobal" class="note small">Status: waiting for data.</div>
+      </div>
+      <div class="hint">Make sure `fashion_recommender.csv` is in same folder as these files for Auto-load.</div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="panel">
+      <h2>1) Select Category</h2>
+      <div class="panel-row">
+        <div class="btn-group">
+          <button class="btn category-btn" data-cat="All">All</button>
+          <button class="btn category-btn" data-cat="Women's Fashion">Women's Fashion</button>
+          <button class="btn category-btn" data-cat="Men's Fashion">Men's Fashion</button>
+          <button class="btn category-btn" data-cat="Kids' Fashion">Kids' Fashion</button>
+        </div>
+        <div id="noteCategory" class="note small"></div>
+      </div>
+    </section>
+
+    <!-- Product select + Purchase history -->
+    <section class="panel">
+      <h2>2) Select Product (Purchase History of Selected Product)</h2>
+      <div class="panel-row">
+        <select id="productSelect" class="select"></select>
+        <div id="noteProduct" class="note small"></div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="historyTable">
+          <thead><tr><th>User ID</th><th>Rating</th><th>Price</th><th>Timestamp (if any)</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Top recommendations (category filtered) -->
+    <section class="panel">
+      <h2>3) Top Recommendations (category scope)</h2>
+      <div class="panel-row">
+        <label>Profile:
+          <select id="profileSelect" class="select">
+            <option value="balanced">Balanced (sim 0.5 / rating 0.4 / price 0.1)</option>
+            <option value="rating">Rating-heavy (sim 0.2 / rating 0.7 / price 0.1)</option>
+            <option value="similar">Similarity-heavy (sim 0.7 / rating 0.2 / price 0.1)</option>
+          </select>
+        </label>
+        <button id="btnComputeTop" class="btn">Compute Top-10</button>
+        <div id="noteTop" class="note small"></div>
+      </div>
+
+      <div class="grid" id="topGrid"></div>
+    </section>
+
+    <!-- Similar products -->
+    <section class="panel">
+      <h2>4) Content-Based Similar Products (for selected product & category)</h2>
+      <div id="noteSimilar" class="note small"></div>
+      <div class="grid" id="similarGrid"></div>
+    </section>
+
+    <!-- Predict rating -->
+    <section class="panel">
+      <h2>5) Predict Rating (KNN user-based)</h2>
+      <div class="panel-row">
+        <input id="predUser" class="input" type="number" placeholder="User ID" />
+        <input id="predProduct" class="input" type="number" placeholder="Product ID" />
+        <button id="btnPredict" class="btn">Predict Rating</button>
+      </div>
+      <div id="notePredict" class="note small"></div>
+    </section>
+
+    <!-- EDA -->
+    <section class="panel">
+      <h2>6) EDA Charts (filtered by category)</h2>
+      <div class="chart-row">
+        <canvas id="ratingChart" width="400" height="200"></canvas>
+        <canvas id="priceChart" width="400" height="200"></canvas>
+      </div>
+      <div class="chart-row">
+        <canvas id="scatterChart" width="800" height="300"></canvas>
+      </div>
+      <div id="noteEDA" class="note small"></div>
+    </section>
+
+    <!-- Top-10 table -->
+    <section class="panel">
+      <h2>7) Top-10 Table (Rank | Product ID | Name | Brand | Rating | Price | Color | Size | Score)</h2>
+      <div class="table-wrap">
+        <table id="top10Table">
+          <thead>
+            <tr><th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Price</th><th>Color</th><th>Size</th><th>Score</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="panel note small" id="footerNote">
+      Project: Smart Fashion Recommender — uses simple, explainable CF + content-based methods; tuned for demo/proof-of-concept.
+    </footer>
+  </main>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- App logic -->
+  <script src="app.js"></script>
+</body>
+</html>
