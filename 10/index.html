@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Fashion Recommender v5</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>👗 Smart Fashion Recommender System v5</h1>
+    <p class="subtitle">Personalized, Insightful & Data-Driven Fashion Experience</p>
+  </header>
+
+  <section class="controls">
+    <h2>1️⃣ Select Category</h2>
+    <div class="category-buttons">
+      <button class="category-btn active" data-category="All">All</button>
+      <button class="category-btn" data-category="Women's Fashion">Women's Fashion</button>
+      <button class="category-btn" data-category="Men's Fashion">Men's Fashion</button>
+      <button class="category-btn" data-category="Kids' Fashion">Kids' Fashion</button>
+    </div>
+  </section>
+
+  <section class="purchase-history">
+    <h2>2️⃣ Purchase History by Product</h2>
+    <select id="productSelect"></select>
+    <table id="purchaseTable">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>User ID</th>
+          <th>Brand</th>
+          <th>Rating</th>
+          <th>Price ($)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="recommendations">
+    <h2>3️⃣ Top Recommendations (🔥 Category Scope)</h2>
+    <div id="topRecommendations" class="cards"></div>
+  </section>
+
+  <section class="similar-products">
+    <h2>4️⃣ Content-Based Similar Products</h2>
+    <div id="similarProducts" class="cards"></div>
+  </section>
+
+  <section class="predict-rating">
+    <h2>5️⃣ Predict User Rating (KNN-based)</h2>
+    <div class="predict-form">
+      <input type="number" id="userIdInput" placeholder="Enter User ID" />
+      <select id="productIdSelect"></select>
+      <button id="predictBtn">Predict Rating</button>
+    </div>
+    <p id="predictionResult"></p>
+  </section>
+
+  <section class="eda">
+    <h2>6️⃣ Exploratory Data Analysis</h2>
+    <canvas id="ratingChart"></canvas>
+    <canvas id="priceRatingChart"></canvas>
+    <p class="insight" id="edaInsight"></p>
+  </section>
+
+  <footer>
+    <p>✨ Proof-of-Concept by Smart Fashion Recommender v5 | All rights reserved</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
