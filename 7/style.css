@@ -1,0 +1,13 @@
+body { font-family: Arial; background: #fff0f5; color: #333; margin:0; padding:0;}
+header { text-align:center; padding:20px; background:#ffe4f1; }
+h1 { color:#ff1493; margin:0; }
+h2 { color:#ff69b4; margin-top:30px; }
+.product-card { border:1px solid #ff69b4; padding:10px; margin:10px; border-radius:10px; position:relative; transition:0.3s; display:inline-block; width:200px; vertical-align:top;}
+.product-card:hover { transform:scale(1.05); box-shadow:0 0 10px #ff69b4; }
+.small-card { width:180px; }
+.badge { position:absolute; top:5px; right:5px; background:#ff4500; color:#fff; padding:2px 5px; border-radius:5px; font-size:12px; }
+button { background:#ff69b4; border:none; color:#fff; padding:5px 10px; border-radius:5px; cursor:pointer; margin-top:5px; }
+button:hover { background:#ff1493; }
+.charts-container { display:flex; justify-content:space-around; flex-wrap:wrap; }
+canvas { max-width:500px; margin:10px; }
+footer { text-align:center; padding:20px; background:#ffe4f1; margin-top:30px;}
