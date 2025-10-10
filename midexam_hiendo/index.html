@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Smart Fashion Recommender — Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- stable D3 CDN (must load before app.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Smart Fashion Recommender 💖</h1>
+      <p class="subtitle">Category-aware recommendations, similarity, and EDA — client-side, GitHub Pages ready.</p>
+    </header>
+
+    <!-- Data load controls -->
+    <section class="controls">
+      <div class="left">
+        <button id="autoLoadBtn" class="btn">Auto-load CSV from GitHub</button>
+        <label class="btn file-btn">
+          Upload CSV
+          <input id="uploadCsv" type="file" accept=".csv,text/csv" />
+        </label>
+        <div id="loadNote" class="note small">No data loaded yet.</div>
+      </div>
+
+      <div class="right">
+        <div class="category-row">
+          <button class="cat-btn active" data-cat="All">All</button>
+          <button class="cat-btn" data-cat="Women's Fashion">Women's</button>
+          <button class="cat-btn" data-cat="Men's Fashion">Men's</button>
+          <button class="cat-btn" data-cat="Kids' Fashion">Kids'</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Top Recommendations (category scope) -->
+    <section id="topRecommendations" class="panel">
+      <h2>🔥 Top Recommendations (Category scope)</h2>
+      <div id="recommendationContainer" class="card-grid"></div>
+    </section>
+
+    <!-- 2. Content-Based Similar Products -->
+    <section id="similarSection" class="panel">
+      <h2>🧩 Content-based Similar Products (cosine similarity)</h2>
+      <div class="row">
+        <select id="productSelect" class="wide"></select>
+        <button id="showSimilarBtn" class="btn">Show Similar</button>
+        <div id="similarNote" class="note small"></div>
+      </div>
+      <div id="similarContainer" class="card-grid"></div>
+    </section>
+
+    <!-- 3. Exploratory Data Analysis (category-scoped) -->
+    <section id="edaSection" class="panel">
+      <h2>📊 EDA — (by selected category)</h2>
+      <div class="eda-grid">
+        <div class="chart-card">
+          <h3>Rating Distribution</h3>
+          <div id="ratingChart"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Price Distribution</h3>
+          <div id="priceChart"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Price vs Rating (scatter)</h3>
+          <div id="scatterChart"></div>
+        </div>
+      </div>
+      <div id="edaNote" class="note small"></div>
+    </section>
+
+    <!-- 4. Purchase History by Product (Product Name scope + category) -->
+    <section id="historySection" class="panel">
+      <h2>🛒 Purchase History (by Product Name & Category)</h2>
+      <div class="table-wrap">
+        <table id="historyTable">
+          <thead><tr><th>Product ID</th><th>User ID</th><th>Brand</th><th>Rating</th><th>Price</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. Top-10 Tables -->
+    <section id="topTablesSection" class="panel">
+      <h2>🏆 Top-10 (category & product-aware)</h2>
+      <p class="note small">Score formula: <strong>0.5×norm(Rating) + 0.3×norm(Price) + 0.2×diversity</strong></p>
+
+      <div class="two-tables">
+        <div class="table-wrap">
+          <h3>Top 10 by Rating</h3>
+          <table id="topRatingTable">
+            <thead><tr><th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Color</th><th>Size</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="table-wrap">
+          <h3>Top 10 by Score</h3>
+          <table id="topScoreTable">
+            <thead><tr><th>Rank</th><th>Product ID</th><th>Name</th><th>Brand</th><th>Rating</th><th>Price</th><th>Color</th><th>Size</th><th>Score</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div id="finalNote" class="note small"></div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
