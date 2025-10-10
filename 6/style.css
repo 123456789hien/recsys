@@ -1,0 +1,107 @@
+/* === GENERAL STYLING === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: #fff0f6;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(90deg, #ff99cc, #ff66aa);
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* === EDA SECTION === */
+#eda {
+    padding: 20px;
+}
+
+#eda-summary {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+#charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Tooltip for scatter plot */
+.tooltip {
+    position: absolute;
+    background: #ffccdd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* === RECOMMENDATIONS CARDS === */
+#recommendation-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* CARD CONTENT */
+.card h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ff3399;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+/* HOT BADGE */
+.hot-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff3333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #ff99cc, #ff66aa);
+    color: white;
+    margin-top: 30px;
+}
