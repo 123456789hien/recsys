@@ -22,230 +22,189 @@ flowchart TD
     H --> |Brand, Price, Rating| H1[Dynamic Filtering & Sorting]
     K --> |Charts: Rating, Price, Brand| K1[Chart.js or DOM]
 
-Smart Fashion Recommender System
-Table of Contents
-
-Objective
-
-UI & Layout Design
-
-Data Management
-
-Normalization & Scoring
-
-Recommendation Generation
-
-Sorting and Filtering
-
-Rendering & Visualization
-
-Initialization & Category Handling
-
-Expected System Behavior
-
-Formulas
-
-Technology Summary
-
-1. Objective
-
-Develop a Smart Fashion Recommender System that:
-
-Provides personalized, reproducible, and diverse fashion item recommendations.
-
-Maintains elegant, responsive UI/UX.
-
-Supports sorting and filtering (brand, price, rating).
-
-Ensures correct category separation: Men’s ≠ Women’s ≠ Kids’.
-
-Technologies: HTML5, CSS3, JavaScript (ES6), Chart.js (optional).
-
-2. UI & Layout Design
-
-Goal: Build the main interface and interaction layout.
-
-Methods / Technologies:
-
-Semantic HTML5 (header, main, section, footer).
-
-CSS3 for visual styling: grid layout, responsive design, gradients, shadows, hover effects.
-
-Interactive elements:
-
-Category tabs (All, Women's Fashion, Men's Fashion, Kids' Fashion)
-
-Buttons for Auto-load, Show Similar Products
-
-Tables for top-10 ranking
-
-Dropdowns for product selection
-
-3. Data Management
-
-Goal: Load, parse, and manage product data per category.
-
-Methods / Technologies:
-
-Load datasets via JavaScript fetch() (from GitHub raw CSV or local file).
-
-CSV parsing with delimiter detection (comma or semicolon).
-
-Normalize fields: UserID, ProductID, Name, Brand, Category, Price, Rating, Color, Size.
-
-Correct missing or malformed numeric data using a robust toNumber() helper.
-
-4. Normalization & Scoring
-
-Goal: Compute recommendation scores considering rating, price, and diversity.
-
-Methods / Technologies:
-
-Min-max normalization for numeric features:
-
-norm(v) = (v - min) / (max - min)
-
-
-Deterministic diversity using a hash function on productId:
-
-hashTo01(productId) ∈ [0, 1]
-
-
-Weighted score formula:
-
-Score = 0.5 × normalized(Rating)
-      + 0.3 × normalized(Price, favor cheaper items)
-      + 0.2 × hashTo01(ProductID)  // deterministic diversity
-
-
-Prioritize high rating + low price, while maintaining consistent diversity.
-
-5. Recommendation Generation
-
-Goal: Rank products and generate top recommendations.
-
-Methods / Technologies:
-
-Sort products by Score in descending order.
-
-Select Top N (e.g., top 10) products for display.
-
-Ensure independent scoring per category.
-
-Implemented fully in vanilla JavaScript, client-side.
-
-6. Sorting and Filtering
-
-Goal: Enable real-time sorting and filtering.
-
-Methods / Technologies:
-
-Event-driven UI with JavaScript DOM API.
-
-Sorting options:
-
-By Score
-
-By Rating
-
-By Price
-
-Filtering options:
-
-Brand search (text input)
-
-Future extension: multi-criteria filtering
-
-No page reload required; all operations are dynamic.
-
-7. Rendering & Visualization
-
-Goal: Dynamically render product cards and analytics.
-
-Methods / Technologies:
-
-Use JavaScript DOM API to create product cards.
-
-CSS3 for hover effects, transitions, and responsive layout.
-
-Optional Chart.js visualizations:
-
-Rating distribution (bar chart)
-
-Price distribution (bar chart)
-
-Price vs Rating (scatter chart)
-
-Average rating per brand (bar chart)
-
-8. Initialization & Category Handling
-
-Goal: Ensure correct data display per category.
-
-Methods / Technologies:
-
-Event listeners on category buttons to update filtered data.
-
-Maintain independent filtered arrays for:
-
-All
-
-Women's Fashion
-
-Men's Fashion
-
-Kids' Fashion
-
-Initial rendering on page load.
-
-9. Expected System Behavior
-
-Personalized recommendations: high rating, low price, diverse items.
-
-Deterministic diversity ensures repeatable recommendations.
-
-Responsive, elegant UI/UX with hover and transition effects.
-
-Real-time sorting/filtering without page reload.
-
-Accurate category separation (Men’s ≠ Women’s ≠ Kids’).
-
-10. Formulas
-10.1 Min-Max Normalization
+# **Smart Fashion Recommender System**
+
+## **Table of Contents**
+1. **Objective**  
+2. **UI & Layout Design**  
+3. **Data Management**  
+4. **Normalization & Scoring**  
+5. **Recommendation Generation**  
+6. **Sorting and Filtering**  
+7. **Rendering & Visualization**  
+8. **Initialization & Category Handling**  
+9. **Expected System Behavior**  
+10. **Formulas**  
+11. **Technology Summary**
+
+---
+
+## **1. Objective**
+**Goal:** Develop a Smart Fashion Recommender System that:  
+- Provides **personalized, reproducible, and diverse** fashion recommendations.  
+- Maintains elegant and responsive **UI/UX**.  
+- Supports **sorting and filtering** (brand, price, rating).  
+- Ensures correct **category separation**: Men’s ≠ Women’s ≠ Kids’.  
+
+**Technologies:** HTML5, CSS3, JavaScript (ES6), Chart.js (optional).
+
+---
+
+## **2. UI & Layout Design**
+**Goal:** Build the main interface and interactive layout.
+
+**Methods / Technologies:**  
+- Semantic **HTML5** (header, main, section, footer).  
+- **CSS3** for visual styling: grid layout, responsive design, gradients, shadows, hover effects.  
+- Interactive elements:  
+  - Category tabs (`All`, `Women's Fashion`, `Men's Fashion`, `Kids' Fashion`)  
+  - Buttons: **Auto-load**, **Show Similar Products**  
+  - Tables for **Top-10 ranking**  
+  - Dropdowns for **product selection**  
+
+---
+
+## **3. Data Management**
+**Goal:** Load, parse, and manage product data per category.
+
+**Methods / Technologies:**  
+- Load datasets via **JavaScript `fetch()`** (from CSV or local file).  
+- **CSV parsing** with delimiter detection.  
+- Normalize fields: UserID, ProductID, Name, Brand, Category, Price, Rating, Color, Size.  
+- Handle missing or malformed numeric data with helper functions.
+
+---
+
+## **4. Normalization & Scoring**
+**Goal:** Compute recommendation scores considering **rating**, **price**, and **diversity**.
+
+**Methods / Technologies:**  
+- **Min-max normalization**:  
 normalized(value) = (value - min) / (max - min)
 
-
-Applied to rating and price.
-
-Handles missing or constant values gracefully.
-
-10.2 Deterministic Diversity
+sql
+Copy code
+- **Deterministic diversity** using hash function on ProductID:  
 hashTo01(productId) ∈ [0, 1]
 
-
-Converts productId to a pseudo-random but deterministic float.
-
-Ensures consistent diversity across sessions.
-
-10.3 Recommendation Score
+markdown
+Copy code
+- **Weighted score formula:**  
 Score = 0.5 × normalized(Rating)
-      + 0.3 × normalized(Price)   // lower price prioritized
-      + 0.2 × hashTo01(ProductID)
++ 0.3 × normalized(Price) // lower price prioritized
++ 0.2 × hashTo01(ProductID)
 
+markdown
+Copy code
+- Ensures **high rating + low price** while maintaining consistent diversity.
 
-Weighted combination ensures rating > price > diversity.
+---
 
-Top recommendations selected based on descending score.
+## **5. Recommendation Generation**
+**Goal:** Rank products and generate top recommendations.
 
-11. Technology Summary Table
-Step	Goal	Method / Technology
-UI & Layout	Interface & responsiveness	HTML5, CSS3
-Data Management	Load & separate datasets	JS fetch, CSV parsing
-Normalization & Scoring	Compute recommendation scores	JS, min-max normalization, deterministic hash
-Recommendation Generation	Top product ranking	JS array sorting & slicing
-Sorting & Filtering	User interactivity	JS DOM API, event listeners
-Rendering & Visualization	Display products & charts	JS DOM, CSS3 transitions, Chart.js
-Initialization & Category Handling	Correct category display	JS event listeners, independent category arrays
+**Methods / Technologies:**  
+- Sort products by `Score` in **descending order**.  
+- Select **Top N** (e.g., top 10) products for display.  
+- Ensure independent scoring **per category**.  
+- Implemented with **vanilla JavaScript**, fully client-side.
 
-✅ Note:
-This Markdown document fully captures the design, method, and technology stack for the Smart Fashion Recommender System, including formulas, scoring logic, and category handling. It mirrors the functionality and UI/UX of the 3 original code files.
+---
+
+## **6. Sorting and Filtering**
+**Goal:** Enable **real-time sorting and filtering**.
+
+**Methods / Technologies:**  
+- Event-driven UI using **JavaScript DOM API**.  
+- Sorting options:  
+- By **Score**  
+- By **Rating**  
+- By **Price**  
+- Filtering options:  
+- **Brand search** (text input)  
+- Future extension: multi-criteria filtering  
+- No page reload required; operations are **dynamic**.
+
+---
+
+## **7. Rendering & Visualization**
+**Goal:** Dynamically render product cards and analytics.
+
+**Methods / Technologies:**  
+- Use **JavaScript DOM API** to create product cards.  
+- **CSS3** for hover effects, transitions, responsive layout.  
+- Optional **Chart.js** visualizations:  
+- Rating distribution (bar chart)  
+- Price distribution (bar chart)  
+- Price vs Rating (scatter chart)  
+- Average rating per brand (bar chart)
+
+---
+
+## **8. Initialization & Category Handling**
+**Goal:** Ensure **correct data display** per category.
+
+**Methods / Technologies:**  
+- Event listeners on category buttons to update filtered data.  
+- Maintain independent arrays for:  
+- `All`  
+- `Women's Fashion`  
+- `Men's Fashion`  
+- `Kids' Fashion`  
+- Initial rendering occurs on page load.
+
+---
+
+## **9. Expected System Behavior**
+- Personalized recommendations: **high rating**, **low price**, **diverse items**.  
+- Deterministic diversity ensures **repeatable recommendations**.  
+- Responsive, elegant **UI/UX** with hover and transition effects.  
+- Real-time sorting/filtering without page reload.  
+- Accurate **category separation**.
+
+---
+
+## **10. Formulas**
+
+### **10.1 Min-Max Normalization**
+normalized(value) = (value - min) / (max - min)
+
+markdown
+Copy code
+- Applied to **rating** and **price**.  
+
+### **10.2 Deterministic Diversity**
+hashTo01(productId) ∈ [0, 1]
+
+markdown
+Copy code
+- Converts `productId` to pseudo-random but deterministic float.  
+
+### **10.3 Recommendation Score**
+Score = 0.5 × normalized(Rating)
++ 0.3 × normalized(Price) // lower price prioritized
++ 0.2 × hashTo01(ProductID)
+
+yaml
+Copy code
+- Weighted combination: **rating > price > diversity**.  
+- Top recommendations selected based on **descending score**.
+
+---
+
+## **11. Technology Summary Table**
+
+| Step | Goal | Method / Technology |
+|------|------|-------------------|
+| UI & Layout | Interface & responsiveness | HTML5, CSS3 |
+| Data Management | Load & separate datasets | JS `fetch`, CSV parsing |
+| Normalization & Scoring | Compute recommendation scores | JS, min-max normalization, deterministic hash |
+| Recommendation Generation | Top product ranking | JS array sorting & slicing |
+| Sorting & Filtering | User interactivity | JS DOM API, event listeners |
+| Rendering & Visualization | Display products & charts | JS DOM, CSS3 transitions, Chart.js |
+| Initialization & Category Handling | Correct category display | JS event listeners, independent category arrays |
+
+---
+
+**Note:**  
+This README captures the **design, methods, technology stack, formulas, scoring logic, and category handling** for the Smart Fashion Recommender System. Fully mirrors the functionality and UI/UX of the 3 original code files.
