@@ -10,7 +10,7 @@
 
 /* ============== CONFIG ============== */
 /* Set your raw CSV URL here for Auto-load */
-const dataUrl = "https://raw.githubusercontent.com/123456789hien/recsys/refs/heads/main/midexam_dhien/fashion_recommender.csv";
+const dataUrl = "https://raw.githubusercontent.com/123456789hien/recsys/refs/heads/main/dh_midtermexam/fashion_recommender.csv";
 const AUTOLOAD_URL = dataUrl;
 
 /* ============== STATE ============== */
