@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Content-Based Movie Recommender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Content-Based Movie Recommender</h1>
+        <p class="instructions">
+            Select a movie you like and we will find similar ones for you based on genre similarity.
+        </p>
+
+        <div class="control-panel">
+            <label for="movie-select" class="control-label">Choose a movie</label>
+            <select id="movie-select">
+                <!-- Options will be populated dynamically -->
+            </select>
+
+            <button id="recommend-btn" onclick="getRecommendations()">
+                Get Recommendations
+            </button>
+        </div>
+
+        <div id="result-box">
+            <p id="result">Loading data. Please wait...</p>
+        </div>
+    </div>
+
+    <!-- Data handling module must load first -->
+    <script src="data.js"></script>
+    <!-- UI and recommendation logic -->
+    <script src="script.js"></script>
+</body>
+</html>
