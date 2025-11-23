@@ -1,2 +1,2 @@
 # recsys
-This is my space for RecSys homework.
+This is my space for Recommender Systems homeworks and projects.
