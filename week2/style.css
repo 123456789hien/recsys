@@ -1,163 +1,108 @@
-// script.js
-// UI logic and recommendation logic using COSINE similarity on genre vectors
-
-let movieSelect
-let resultParagraph
-
-// Initialize the app when the window loads
-window.onload = async function () {
-    movieSelect = document.getElementById("movie-select")
-    resultParagraph = document.getElementById("result")
-
-    if (!movieSelect || !resultParagraph) {
-        console.error("Missing #movie-select or #result in HTML")
-        return
-    }
-
-    resultParagraph.innerText = "Loading data..."
-
-    try {
-        // loadData is defined in data.js
-        await loadData()
-        populateMoviesDropdown()
-        resultParagraph.innerText =
-            'Data loaded. Please select a movie and click "Get Recommendations".'
-    } catch (error) {
-        console.error(error)
-        resultParagraph.innerText = "Error loading data: " + error.message
-    }
+/* Global layout */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #222;
 }
 
-/**
- * Populate the movie dropdown with sorted movie titles
- */
-function populateMoviesDropdown() {
-    if (!Array.isArray(movies) || movies.length === 0) {
-        if (resultParagraph) {
-            resultParagraph.innerText = "No movies available."
-        }
-        return
-    }
-
-    const sortedMovies = [...movies].sort((a, b) =>
-        a.title.localeCompare(b.title)
-    )
-
-    movieSelect.innerHTML = ""
-
-    for (const movie of sortedMovies) {
-        const option = document.createElement("option")
-        option.value = movie.id
-        option.textContent = movie.title
-        movieSelect.appendChild(option)
-    }
+/* Main application container */
+.app-container {
+    background-color: #ffffff;
+    padding: 32px 40px;
+    max-width: 640px;
+    width: 90%;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-/**
- * Cosine similarity for genre sets (binary vectors)
- * genresA and genresB are arrays of strings, for example ["Action", "Sci-Fi"]
- *
- * For binary genre vectors:
- * cosine(A, B) = |A ∩ B| / sqrt(|A| * |B|)
- */
-function cosineSimilarityFromGenreSets(genresA, genresB) {
-    if (!Array.isArray(genresA) || !Array.isArray(genresB)) {
-        return 0
-    }
-
-    const setA = new Set(genresA)
-    const setB = new Set(genresB)
-
-    const sizeA = setA.size
-    const sizeB = setB.size
-
-    if (sizeA === 0 || sizeB === 0) {
-        return 0
-    }
-
-    let intersectionSize = 0
-    for (const genre of setA) {
-        if (setB.has(genre)) {
-            intersectionSize++
-        }
-    }
-
-    const denominator = Math.sqrt(sizeA * sizeB)
-    if (denominator === 0) return 0
-
-    return intersectionSize / denominator
+/* Heading and text */
+h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 28px;
+    text-align: center;
+    color: #1f3a56;
 }
 
-/**
- * Main function called when user clicks "Get Recommendations"
- * 1. Get user movie selection
- * 2. Provide recommendations based on it
- * 3. Similarity function is COSINE not Jaccard
- */
-function getRecommendations() {
-    if (!movieSelect || !resultParagraph) return
+.instructions {
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: #5a6b7b;
+}
 
-    const selectedIdStr = movieSelect.value
+/* Controls */
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
 
-    // Step 1: Get user selection
-    if (!selectedIdStr) {
-        resultParagraph.innerText = "Please select a movie first."
-        return
-    }
+.control-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f3a56;
+}
 
-    const selectedId = parseInt(selectedIdStr, 10)
+#movie-select {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #c7d4de;
+    outline: none;
+    background-color: #f9fbfc;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
 
-    // Step 2: Find the liked movie from global movies array
-    const likedMovie = movies.find(
-        (m) => Number(m.id) === selectedId
-    )
+#movie-select:focus {
+    border-color: #2a7cd6;
+    box-shadow: 0 0 0 2px rgba(42, 124, 214, 0.15);
+}
 
-    if (!likedMovie) {
-        resultParagraph.innerText =
-            "Could not find the selected movie in the dataset."
-        return
-    }
+/* Button */
+#recommend-btn {
+    margin-top: 4px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #2a7cd6;
+    color: #ffffff;
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
 
-    if (!Array.isArray(likedMovie.genres) || likedMovie.genres.length === 0) {
-        resultParagraph.innerText =
-            `The movie "${likedMovie.title}" has no genre information so we cannot compute recommendations.`
-        return
-    }
+#recommend-btn:hover {
+    background-color: #235fa7;
+    box-shadow: 0 4px 10px rgba(35, 95, 167, 0.25);
+    transform: translateY(-1px);
+}
 
-    // Build candidate set: all other movies
-    const candidateMovies = movies.filter(
-        (m) => Number(m.id) !== selectedId
-    )
+#recommend-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
 
-    // Compute cosine similarity for each candidate
-    const scoredMovies = candidateMovies
-        .map((movie) => {
-            const score = cosineSimilarityFromGenreSets(
-                likedMovie.genres,
-                movie.genres || []
-            )
-            return { ...movie, score }
-        })
-        .filter((movie) => movie.score > 0)
+/* Result box */
+#result-box {
+    padding: 14px 16px;
+    border-radius: 8px;
+    background-color: #f0f4f8;
+    border: 1px solid #d4e0ea;
+}
 
-    if (scoredMovies.length === 0) {
-        resultParagraph.innerText =
-            `No similar movies found for "${likedMovie.title}".`
-        return
-    }
-
-    // Sort by cosine similarity descending
-    scoredMovies.sort((a, b) => b.score - a.score)
-
-    // Take top 2 recommendations
-    const topK = scoredMovies.slice(0, 2)
-
-    const recTexts = topK.map(
-        (movie) => `${movie.title} (similarity: ${movie.score.toFixed(3)})`
-    )
-
-    resultParagraph.innerText =
-        `Because you liked "${likedMovie.title}" we recommend: ` +
-        recTexts.join(", ") +
-        "."
+#result {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #243447;
 }
