@@ -189,5 +189,4 @@ FinalScore = 0.4 * simNorm + 0.4 * ratingNorm + 0.2 * (1 - priceNorm)
 
 ---
 
-**Note:**  
-This README fully captures **design, methods, technology stack, formulas, scoring logic, Two-Tower embeddings, and category handling** for the Smart Fashion Recommender System. Mirrors the functionality and UI/UX of the 3 original code files while integrating the Two-Tower approach.
+_**Link page:**_ https://123456789hien.github.io/recsys/Smart%20Fashion%20Recommender%20System%20(Two-Tower%20Version)/
