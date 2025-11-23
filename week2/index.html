@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Movie Recommender</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Simple Movie Recommendation System</h2>
+  <label for="movieSelect">Choose a movie you like:</label>
+  <select id="movieSelect"></select>
+  <br>
+  <button onclick="recommend()">Get Recommendations</button>
+
+  <div class="recommendations">
+    <h3>Recommended Movies:</h3>
+    <ul id="recommendList"></ul>
+  </div>
+
+  <!-- Nhúng dataset trước -->
+  <script src="moviesData.js"></script>
+  <!-- Logic parse dữ liệu -->
+  <script src="data.js"></script>
+  <!-- Logic recommend -->
+  <script src="script.js"></script>
+</body>
+</html>
