@@ -31,3 +31,4 @@ You are asked to implement a PageRank Friend Recommendation App using HTML, D3.j
     - graph.js: D3.js graph rendering and interaction
 
 The final app must be fully functional, error-free, and exactly match the professor’s UI/UX while implementing all features including table sorting, top 3 friend recommendations, node highlighting, and dynamic PageRank recomputation.
+Link page: https://123456789hien.github.io/recsys/week5/
