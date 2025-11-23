@@ -90,4 +90,4 @@ This file handles the user interface and the recommendation logic. It will depen
         -   **Step 7 (Display Result):** Construct a user-friendly output string (e.g., "Because you liked '[Liked Movie Title]', we recommend: [Movie 1 Title], [Movie 2 Title]") and set it as the `innerText` of the `#result` paragraph.
 
 ---
-Please now generate the complete code for the `index.html`, `style.css`, `data.js`, and `script.js` files based on these final, detailed specifications.
+Link page: https://123456789hien.github.io/recsys/week2/
