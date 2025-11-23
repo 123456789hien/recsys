@@ -108,3 +108,5 @@ _**c) two-tower.js**_
     - Load Data → parse and index
     - Train → run epochs, update loss chart, draw embedding projection
     - Test → pick random qualified user, render 3-column side-by-side table: historical top-10, top-10 without DL, top-10 with DL
+
+_**Link page**_: https://123456789hien.github.io/recsys/week4/
