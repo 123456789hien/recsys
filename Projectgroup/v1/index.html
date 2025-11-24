@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindMood – Emotion-Aware Mental Wellness Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="mm-header">
+    <div class="mm-header-inner">
+      <div>
+        <h1>MindMood</h1>
+        <p class="mm-subtitle">
+          Emotion-aware recommendations for mental wellness and relaxation
+        </p>
+      </div>
+      <div class="mm-badge">Demo Prototype</div>
+    </div>
+  </header>
+
+  <main class="mm-main">
+    <!-- Left column: input -->
+    <section class="mm-panel mm-panel-input">
+      <h2>Step 1 · Tell us how you feel</h2>
+      <p class="mm-panel-desc">
+        Choose a mode then describe your current mood. MindMood will build an emotion profile and suggest helpful content.
+      </p>
+
+      <!-- Mode toggle -->
+      <div id="mode-toggle" class="mm-mode-toggle">
+        <button data-mode="text" class="mode-btn active">Text</button>
+        <button data-mode="audio" class="mode-btn">Audio</button>
+        <button data-mode="slider" class="mode-btn">Sliders</button>
+      </div>
+
+      <!-- Text input panel -->
+      <div id="text-input-panel" class="mm-input-panel">
+        <label for="mood-text" class="mm-label">Type a short reflection</label>
+        <textarea
+          id="mood-text"
+          class="mm-textarea"
+          rows="5"
+          placeholder="Example: I feel a bit anxious and tired after a long day but I am hopeful about tomorrow"
+        ></textarea>
+      </div>
+
+      <!-- Audio input panel -->
+      <div id="audio-input-panel" class="mm-input-panel hidden">
+        <p class="mm-label">Select a demo audio sample</p>
+        <select id="audio-select" class="mm-select"></select>
+        <audio id="audio-player" controls class="mm-audio"></audio>
+        <p class="mm-hint">
+          In a full version your own voice would be processed on device.
+          For the demo we use a few pre-labeled samples.
+        </p>
+      </div>
+
+      <!-- Slider input panel -->
+      <div id="slider-input-panel" class="mm-input-panel hidden">
+        <p class="mm-label">Adjust how strongly you feel each emotion</p>
+
+        <div class="mm-slider-row">
+          <div class="mm-slider-label">
+            <span>Euphoria</span>
+            <span id="val-euphoria" class="mm-slider-value">0</span>
+          </div>
+          <input id="slider-euphoria" type="range" min="0" max="100" value="0" />
+        </div>
+
+        <div class="mm-slider-row">
+          <div class="mm-slider-label">
+            <span>Joy</span>
+            <span id="val-joy" class="mm-slider-value">50</span>
+          </div>
+          <input id="slider-joy" type="range" min="0" max="100" value="50" />
+        </div>
+
+        <div class="mm-slider-row">
+          <div class="mm-slider-label">
+            <span>Sadness</span>
+            <span id="val-sadness" class="mm-slider-value">20</span>
+          </div>
+          <input id="slider-sadness" type="range" min="0" max="100" value="20" />
+        </div>
+
+        <div class="mm-slider-row">
+          <div class="mm-slider-label">
+            <span>Surprise</span>
+            <span id="val-surprise" class="mm-slider-value">10</span>
+          </div>
+          <input id="slider-surprise" type="range" min="0" max="100" value="10" />
+        </div>
+
+        <p class="mm-hint">
+          These sliders give you full control. Use them when you want to override the text or audio analysis.
+        </p>
+      </div>
+
+      <button id="btn-recommend" class="mm-button-primary">
+        Get recommendations
+      </button>
+
+      <div id="status-message" class="mm-status"></div>
+    </section>
+
+    <!-- Right column: results -->
+    <section class="mm-panel mm-panel-results">
+      <h2>Step 2 · Emotion profile and suggestions</h2>
+
+      <!-- Emotion profile display -->
+      <div id="emotion-profile-display" class="mm-profile-card">
+        <p class="mm-placeholder">
+          Your emotion profile will appear here after you request recommendations.
+        </p>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="mm-recs-header">
+        <h3>Recommended for you</h3>
+        <span id="rec-count" class="mm-rec-count"></span>
+      </div>
+      <div id="recommendation-list" class="mm-rec-list">
+        <!-- cards will be injected here -->
+      </div>
+
+      <!-- Session history -->
+      <div class="mm-history">
+        <div class="mm-history-header">
+          <h3>Your recent sessions</h3>
+          <button id="btn-clear-history" class="mm-button-ghost">
+            Clear local history
+          </button>
+        </div>
+        <div id="session-log" class="mm-session-log">
+          <p class="mm-placeholder">
+            Once you use MindMood a few times your recent emotion snapshots will appear here.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mm-footer">
+    <p>
+      MindMood · Emotion-aware recommender for academic demo purposes only
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
