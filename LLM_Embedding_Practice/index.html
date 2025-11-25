@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Two-Tower Movie Recommender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Two-Tower Movie Recommender</h1>
+        <p class="instructions">
+            This demo upgrades the earlier homework. Instead of picking a single movie,
+            you describe your preferences in natural language and a Two-Tower model
+            retrieves similar movies from MovieLens 100K using cosine similarity.
+        </p>
+
+        <!-- SECTION 1: Item Tower - Movie DB (Offline) -->
+        <section class="section-block">
+            <h2 class="section-title">Step 1 — Item Tower: Movie Database Preparation (Offline)</h2>
+            <p class="section-text">
+                The movie embeddings were created in Colab from the MovieLens 100K dataset using a Two-Tower model.
+                Each movie has an embedding vector stored in <code>data/movies_db.json</code>.
+                Click the button to load this database into the browser.
+            </p>
+
+            <div class="button-row">
+                <button id="btn-load" type="button" onclick="handleLoadDB()">
+                    Load Movie Embedding DB
+                </button>
+                <span id="load-status" class="status-text">Ready to load data...</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: User Tower - Query as Text (Online) -->
+        <section class="section-block">
+            <h2 class="section-title">Step 2 — User Tower: Real-Time Query Processing (Online)</h2>
+            <p class="section-text">
+                Type what you feel like watching. The user tower will encode this text into an embedding
+                that lives in the same space as the movie vectors from the item tower.
+            </p>
+
+            <label for="query-input" class="control-label">Your query</label>
+            <textarea id="query-input"
+                      placeholder="I want to watch something scary tonight—no ghosts or supernatural stuff, just that creepy, chilling kind of movie."></textarea>
+
+            <div class="button-row">
+                <button id="btn-recommend" type="button" onclick="handleRecommend()">
+                    Recommend Movies
+                </button>
+            </div>
+
+            <div id="query-embedding-info" class="info-text"></div>
+        </section>
+
+        <!-- SECTION 3: Similarity Search (Two-Tower Interaction) -->
+        <section class="section-block">
+            <h2 class="section-title">Step 3 — Similarity Search (Two-Tower Interaction)</h2>
+            <p class="section-text">
+                The system computes cosine similarity between the query embedding and all movie embeddings.
+                This is the Two-Tower interaction: one vector from the user tower and one from the item tower.
+                We rank movies by similarity and show the top results.
+            </p>
+
+            <div id="result-box">
+                <p id="result">No results yet. Load the movie DB and type a query to begin.</p>
+                <ol id="result-list"></ol>
+            </div>
+        </section>
+
+        <!-- Debug info (for dimension checks etc.) -->
+        <section class="section-block">
+            <h2 class="section-title">Debug — Embedding Space Info</h2>
+            <div id="debug-info" class="debug-box">
+                <p id="debug-text">Waiting for data...</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
