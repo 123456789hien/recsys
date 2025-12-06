@@ -1,0 +1,101 @@
+﻿item_id;title;type;description;emotion_target;score
+1;5-minute calming breathing;exercise;Short guided breathing to reduce stress;Angry;0.80
+2;Cooling down after conflict;exercise;A structured way to cool down after an argument.;Angry;0.75
+3;Energy-boost happy playlist;music;Upbeat,  positive tracks to lift your mood ;Amused;0.85
+4;Light amusement video suggestion;video;Watch something light and funny to gently lift your mood;Amused;0.80
+5;Gentle sleep meditation;meditation;Soft voice guidance to help you unwind and fall asleep;Sleepy;0.90
+6;Relaxing nature sounds;music;Calming natural sounds to promote relaxation;Neutral;0.65
+7;Deep sleep music;music;Music designed to help you fall asleep;Sleepy;0.92
+8;Guided anxiety relief;exercise;Guided exercises to alleviate anxiety;Angry;0.70
+9;Upbeat pop playlist;music;A playlist of energetic pop songs;Amused;0.77
+10;Meditation for stress relief;meditation;Meditation session to relieve stress;Neutral;0.60
+11;Peaceful piano music;music;Soft piano music to help calm the mind;Neutral;0.55
+12;Chill vibes music;music;Laid-back music to wind down after a busy day;Sleepy;0.88
+13;Motivational morning exercise;exercise;Start your day with an energizing workout;Angry;0.62
+14;Happy yoga session;exercise;A fun and relaxing yoga routine;Amused;0.78
+15;Laughter therapy;exercise;A session of laughter therapy to lift your spirits;Amused;0.79
+16;Calming nature walk;exercise;A peaceful walk through a serene landscape;Sleepy;0.82
+17;Sleep music for kids;music;Gentle sleep music tailored for children;Sleepy;0.93
+18;Guided visualization for stress;meditation;A visualization exercise to relieve stress;Angry;0.68
+19;Relaxing beach sounds;music;Soft beach sounds to help you relax;Neutral;0.64
+20;Motivation for the day;video;A motivational video to start your day;Amused;0.75
+21;Mindful breathing for sleep;meditation;Mindful breathing exercise to promote restful sleep;Sleepy;0.91
+22;Soothing music for sleep;music;Calm and peaceful music for a deep sleep;Sleepy;0.89
+23;Quick anger management tips;exercise;Quick exercises to reduce anger and frustration;Angry;0.78
+24;Restorative yoga session;exercise;A yoga session designed to restore energy;Sleepy;0.85
+25;Playful dance break;exercise;Get up and dance to lift your mood!;Amused;0.76
+26;Joyful morning stretch;exercise;Start your day with a gentle,  joyful stretch;Amused;0.72
+27;Progressive muscle relaxation;meditation;A relaxation exercise focusing on tense and relaxed muscles;Sleepy;0.87
+28;Positive affirmation session;exercise;Boost your mood with positive affirmations;Amused;0.80
+29;Chanting for calmness;meditation;A calming chanting exercise to soothe the mind;Sleepy;0.83
+30;Feel-good acoustic playlist;music;Soft and uplifting acoustic music to feel good;Amused;0.85
+31;Morning motivation video;video;A motivational video to start your day;Amused;0.78
+32;Self-care relaxation routine;exercise;Relax and unwind with a soothing self-care routine;Sleepy;0.80
+33;Interactive stress-relief game;video;An interactive game designed to help reduce stress;Neutral;0.65
+34;Deep breathing for anger relief;exercise;Deep breathing exercises to help release anger;Angry;0.70
+35;Yoga for relaxation;exercise;Calming yoga session designed to reduce stress;Neutral;0.60
+36;Chilled out jazz music;music;Smooth jazz music to help you relax;Sleepy;0.88
+37;Peaceful walk through nature;exercise;A calming walk through a natural landscape;Sleepy;0.90
+38;Sleep sound effects;music;Sounds that help promote a peaceful night's sleep;Sleepy;0.92
+39;Calm and peaceful meditation;meditation;Guided meditation to calm your mind;Neutral;0.64
+40;Get active morning routine;exercise;Start your day with a quick,  energizing routine;Angry;0.62
+41;Happiness playlist;music;Music that lifts your spirits and boosts your happiness;Amused;0.76
+42;Yoga for mindfulness;exercise;Slow yoga session to help you stay present and mindful;Sleepy;0.85
+43;Positive thinking audio;exercise;Audio to guide you through positive thinking exercises;Amused;0.70
+44;Deep sleep meditation;meditation;Deep meditation to prepare for a restful night’s sleep;Sleepy;0.91
+45;Refresh and recharge playlist;music;Upbeat playlist to help refresh and recharge your energy;Amused;0.79
+46;Stress-relief breathing exercises;exercise;Guided breathing exercises to reduce stress;Angry;0.72
+47;Relaxing instrumental music;music;Soft instrumental music to help relax;Neutral;0.55
+48;Happy morning motivation;video;Inspirational video to help you start your day with joy;Amused;0.75
+49;Meditation for inner peace;meditation;Meditation to bring inner peace and calmness;Neutral;0.64
+50;Positive mood dance routine;exercise;Upbeat dance routine to lift your mood;Amused;0.80
+51;Calming spa music;music;Music designed to promote relaxation in a spa setting;Sleepy;0.89
+52;Chill-out ambient sounds;music;Ambient music for a peaceful,  stress-free environment;Sleepy;0.87
+53;Post-workout cool down;exercise;Stretch and cool down after an intense workout;Neutral;0.62
+54;Yoga for calmness;exercise;A calming yoga session to release tension;Neutral;0.60
+55;Relaxing classical music;music;Soft classical music for relaxation;Neutral;0.65
+56;Morning motivation speech;video;Inspirational speech to motivate you in the morning;Amused;0.72
+57;Self-compassion meditation;meditation;Meditation to help you be kind to yourself;Sleepy;0.85
+58;Tranquil waterfall sounds;music;Relaxing sounds of a peaceful waterfall;Neutral;0.60
+59;Positive affirmations for stress relief;exercise;Positive affirmations to reduce stress;Angry;0.75
+60;Releasing tension through dance;exercise;Dance to release stress and tension;Amused;0.80
+61;Meditation for emotional balance;meditation;Guided meditation for emotional balance;Neutral;0.67
+62;Chill beats for focus;music;Relaxing beats to help you stay focused;Sleepy;0.88
+63;Healing nature sounds;music;Sounds of nature to heal and rejuvenate;Sleepy;0.90
+64;Morning gratitude meditation;meditation;A meditation to start the day with gratitude;Amused;0.72
+65;Relaxing jazz for sleep;music;Soft jazz music to help you fall asleep;Sleepy;0.92
+66;Emotional healing through music;music;Music designed to heal emotional wounds;Neutral;0.75
+67;Calm and centered yoga session;exercise;Yoga for relaxation and emotional balance;Neutral;0.60
+68;Affirmation for a positive day;exercise;A positive affirmation to start the day on the right foot;Amused;0.78
+69;Healing energy playlist;music;Music that promotes healing energy for the body and mind;Sleepy;0.87
+70;Peaceful morning meditation;meditation;A calm meditation to start your day peacefully;Sleepy;0.89
+71;Morning gratitude routine;exercise;A gratitude practice to start your day;Amused;0.74
+72;Comforting tea-time music;music;Soft music to accompany your tea-time;Sleepy;0.85
+73;Deep relaxation exercises;exercise;Exercises to help you deeply relax;Sleepy;0.80
+74;Gentle energy yoga;music;Soft yoga music to rejuvenate your energy;Neutral;0.75
+75;Positive mood morning routine;exercise;An energizing routine to start your morning on a positive note;Amused;0.80
+76;Morning zen yoga;exercise;Calming yoga for the morning;Neutral;0.60
+77;Healing sleep music;music;Music designed to help you sleep peacefully;Sleepy;0.92
+78;Post-workout relaxation;exercise;Relaxation exercises to cool down after a workout;Sleepy;0.80
+79;Calming nature meditation;meditation;Guided meditation with nature sounds;Sleepy;0.89
+80;Confidence boosting playlist;music;Music to boost your confidence and motivation;Amused;0.75
+81;Mindful morning routine;exercise;A mindfulness routine to start your day peacefully;Neutral;0.67
+82;Calm & focus yoga;exercise;Yoga designed to improve focus and concentration;Neutral;0.62
+83;Stress-reduction yoga;exercise;Yoga designed to reduce stress and anxiety;Angry;0.70
+84;Relaxation & mindfulness;exercise;Exercises for deep relaxation and mindfulness;Sleepy;0.80
+85;Unwind after work;music;Music to help you unwind after a busy day;Sleepy;0.89
+86;Post-workout stress relief;exercise;Stretching and relaxation after a workout;Angry;0.75
+87;Happy dance party;music;Upbeat music for a fun dance party;Amused;0.80
+88;Guided healing meditation;meditation;A guided meditation to heal emotional wounds;Sleepy;0.85
+89;Confidence booster speech;video;Inspirational speech to boost your confidence;Amused;0.72
+90;Soft classical music;music;Classical music to help you relax and focus;Neutral;0.60
+91;Joyful morning playlist;music;Upbeat playlist to bring joy in the morning;Amused;0.74
+92;Yoga for energy;exercise;Yoga designed to increase energy levels;Amused;0.80
+93;Happy breathing techniques;exercise;Breathing techniques to help you stay calm and positive;Amused;0.77
+94;Calming meditation;meditation;Guided meditation to bring peace and calm;Sleepy;0.90
+95;Morning relaxation routine;exercise;Relaxing routine to start your day;Neutral;0.62
+96;Healing sound therapy;music;Sound therapy designed to heal emotional and physical wounds;Sleepy;0.88
+97;Yoga for emotional release;exercise;Yoga designed to help release emotional tension;Angry;0.70
+98;Joyful movement playlist;music;Upbeat music playlist for movement and fun;Amused;0.76
+99;Relaxing afternoon tea;music;Music for a peaceful afternoon tea;Sleepy;0.85
+100;Post-workout deep relaxation;exercise;Relaxation routine to cool down after exercise;Sleepy;0.80
