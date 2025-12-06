@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMood - Emotion Aware Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>MindMood - Emotion Aware Recommender</h1>
+        
+        <div>
+            <label for="userText">Enter your mood (text):</label>
+            <input type="text" id="userText" name="userText">
+        </div>
+
+        <div>
+            <label for="audioInput">Upload your voice (optional):</label>
+            <input type="file" id="audioInput" name="audioInput" accept="audio/*">
+        </div>
+
+        <button id="submitButton">Submit</button>
+
+        <div id="recommendations">
+            <!-- Recommendations will be displayed here -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
